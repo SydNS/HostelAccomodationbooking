@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser,User
 
 
 # Create your models here.
 
 class Bookhosteltable(models.Model):
-    uid = models.ForeignKey('Users', models.DO_NOTHING, db_column='uid')
+    uid = models.CharField(max_length=40)
     course = models.CharField(max_length=35)
     emergency_no = models.IntegerField()
     guardian_name = models.CharField(max_length=100)

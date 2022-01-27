@@ -10,9 +10,9 @@ urlpatterns = [
     # path('logout/', views.Logout, name='logout'),
     #
     # Auditor of auditors
-    path('bookings/', views.index, name='Bookings'),
-    # path('make_booking/', views.Bookings, name='Make_Bookings'),
-    # path('edit_bookings/<int:id>/', views.Bookings, name='Edit_Bookings'),
+    path('bookings/', views.bookings, name='Bookings'),
+    path('make_booking/', views.makebookings, name='Make_Bookings'),
+    path('edit_bookings/<int:id>/', views.editbookings, name='Edit_Bookings'),
     # # bookings details
     # path('Bookings/<int:id>/', views.Bookings, name='Bookings_Details'),
     #

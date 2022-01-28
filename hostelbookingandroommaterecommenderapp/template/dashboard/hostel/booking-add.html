@@ -1,5 +1,6 @@
 {% extends 'dashboard/hostel/base.html' %}
 <!--{% load static %}-->
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- sidebar @s -->
@@ -188,14 +189,11 @@
                     <div class="nk-block">
                         <div class="card card-bordered">
                             <div class="card-inner">
-                                <div class="row gy-4">
-                                    <div class="col-md-6 col-lg-4 col-xxl-3">
-                                        <div class="form-group">
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <table>{{ form|crispy }}</table>
+                                        <button class="btn btn-info" type="submit"> Send</button>
+                                    </form>
                                 <!--row-->
                             </div><!-- .card-inner-group -->
                         </div><!-- .card -->

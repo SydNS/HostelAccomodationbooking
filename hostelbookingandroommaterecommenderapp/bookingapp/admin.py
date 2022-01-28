@@ -7,9 +7,9 @@ from .models import Bookhosteltable
 
 @admin.register(Bookhosteltable)
 class BookhosteltableAdmin(admin.ModelAdmin):
-    list_display = ('uid', 'course', 'emergency_no', 'guardian_name', 'guardian_no', 'seater', 'price',)
-    list_filter = ('uid', 'course', 'guardian_name', 'seater', 'price',)
-    search_fields = ('uid', 'course', 'emergency_no', 'guardian_name', 'guardian_no', 'seater', 'price',)
+    list_display = ('uid', 'course', 'emergency_no', 'guardian_name', 'guardian_no', 'room_capacity', 'price',)
+    list_filter = ('uid', 'course', 'guardian_name', 'room_capacity', 'price',)
+    search_fields = ('uid', 'course', 'emergency_no', 'guardian_name', 'guardian_no', 'room_capacity', 'price',)
 
 # class Bookhosteltable(models.Model):
 #     uid = models.CharField(max_length=40)
@@ -23,7 +23,7 @@ class BookhosteltableAdmin(admin.ModelAdmin):
 #     city = models.CharField(max_length=50)
 #     state = models.CharField(max_length=100)
 #     pincode = models.CharField(max_length=20)
-#     seater = models.IntegerField()
+#     room_capacity = models.IntegerField()
 #     food = models.CharField(max_length=20)
 #     room_alloted = models.IntegerField()
 #     price = models.IntegerField()

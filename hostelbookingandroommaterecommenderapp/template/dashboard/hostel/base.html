@@ -1,0 +1,44 @@
+{% load static %}
+<html lang="zxx" class="js">
+
+<head>
+    <base href="#">
+    <meta charset="utf-8">
+    <meta name="author" content="Jeanes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Jeanes dashboard.">
+    <!-- Fav Icon  -->
+    <!--    dashboard/asset-->
+    <link rel="shortcut icon" href="{% static 'dashboard/images/favicon.png' %}">
+    <!-- Page Title  -->
+    <title>Jeanes</title>
+    <!-- StyleSheets  -->
+    <!--    hostelbookingandroommaterecommenderapp/static/dashboard/assets/css/dashlite.css-->
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/dashlite.css' %}">
+    <link id="skin-default" rel="stylesheet" href="{% static 'dashboard/assets/css/theme.css' %}">
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+
+<!-- app-root @e -->
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main ">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+    <!-- main @e -->
+</div>
+<!-- app-root @e -->
+
+<!-- JavaScript -->
+<script src="{% static 'dashboard/assets/js/bundle.js' %}"></script>
+<script src="{% static 'dashboard/assets/js/charts/chart-hotel.js' %}"></script>
+<script src="{% static 'dashboard/assets/js/scripts.js' %}"></script>
+<script src="{% static 'dashboard/assets/js/libs/datatable-btns.js' %}"></script>
+</body>
+
+</html>

@@ -3,6 +3,13 @@ from django.contrib.auth.models import AbstractUser,User
 
 
 # Create your models here.
+# ID
+# Customer
+# Package
+# Booking
+# Room Type
+# Arrive
+# Payment
 
 class Bookhosteltable(models.Model):
     uid = models.CharField(max_length=40)
@@ -16,7 +23,7 @@ class Bookhosteltable(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=100)
     pincode = models.CharField(max_length=20)
-    seater = models.IntegerField()
+    room_capacity = models.IntegerField()
     food = models.CharField(max_length=20)
     room_alloted = models.IntegerField()
     price = models.IntegerField()

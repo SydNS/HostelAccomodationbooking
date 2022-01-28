@@ -41,7 +41,7 @@ class Bookhostel(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=100)
     pincode = models.CharField(max_length=20)
-    seater = models.IntegerField()
+    room_capacity = models.IntegerField()
     food = models.CharField(max_length=20)
     room_alloted = models.IntegerField()
     price = models.IntegerField()
@@ -89,7 +89,7 @@ class Notification(models.Model):
 
 class Registration(models.Model):
     roomno = models.IntegerField(blank=True, null=True)
-    seater = models.IntegerField(blank=True, null=True)
+    room_capacity = models.IntegerField(blank=True, null=True)
     feespm = models.IntegerField(blank=True, null=True)
     foodstatus = models.CharField(max_length=30)
     stayfrom = models.DateField(blank=True, null=True)
@@ -135,10 +135,10 @@ class RoomLogs(models.Model):
 
 class Rooms(models.Model):
     room_no = models.IntegerField()
-    seater = models.IntegerField()
+    room_capacity = models.IntegerField()
     gender = models.CharField(max_length=11)
     fees = models.IntegerField()
-    seater1 = models.IntegerField()
+    room_capacity1 = models.IntegerField()
     room_my = models.IntegerField()
     one = models.CharField(max_length=20)
     two = models.CharField(max_length=20)

@@ -66,14 +66,26 @@ def bookings(request):
 # Create your create-views here.
 def makebookings(request):
     if request.method == 'POST':
-        bookingform=Bookhosteltableform(request.POST)
-
+        bookingform = Bookhosteltableform(request.POST)
         if bookingform.is_valid():
-            bookingform_=bookingform.save(commit=True)
-            return redirect('Bookings')
+            bookingform_ = bookingform.save(commit=True)
+            return redirect('indexroute')
     else:
-        form = Bookhosteltableform()
-    return render(request=request, template_name='dashboard/hostel/booking-add.html',context={'form': form})
+        formpassed = Bookhosteltableform()
+
+    return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
+
+# def makebookings(request):
+#     if request.method == "POST":
+#         form = Bookhosteltableform(request.POST)
+#         if form.is_valid():
+#             form.save(commit=True)
+#             return redirect('indexroute')
+#     # else:
+#
+#     formpassed = Bookhosteltableform()
+#     return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
+
 
 
 # Create your edit-views here.

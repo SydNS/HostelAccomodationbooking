@@ -27,39 +27,63 @@ from .models import Bookhosteltable
 
 # Create your create-views here.
 def index(request):
-    bookingslist = get_list_or_404(Bookhosteltable)
+    bookingslist = Bookhosteltable.objects.all()
+    if not bookingslist:
+        return render(request=request, template_name="dashboard/hostel/index.html",
+                      context={'bookingslist': {},
+                               'totalprice': 0,
+                               'immediate_price_diff': 0,
+                               'immediate_price_diff_sec_third': 0,
+                               'firstprice': 0,
+                               'lastprice': 0,
 
-    num = Bookhosteltable.objects.all()
-    totalprice = Bookhosteltable.objects.all().aggregate(Sum('price'))
+                               }
+                      )
+    else:
+        num = Bookhosteltable.objects.all()
+        totalprice = Bookhosteltable.objects.all().aggregate(Sum('price'))
 
-    # working on booking price difference
-    firstprice = bookingslist[0].price
-    lastprice = bookingslist[-1].price
-    secondlastprice = bookingslist[-2].price
-    thirdlastprice = bookingslist[-3].price
-    immediate_price_diff = secondlastprice - lastprice
+        # working on booking price difference
+        firstprice = bookingslist[0].price
+        lastprice = bookingslist[-1].price
+        secondlastprice = bookingslist[-2].price
+        thirdlastprice = bookingslist[-3].price
+        immediate_price_diff = secondlastprice - lastprice
 
-    #  percentage price difference
-    percentagepricechange = round((immediate_price_diff / totalprice['price__sum']) * 100, 1)
+        #  percentage price difference
+        percentagepricechange = round((immediate_price_diff / totalprice['price__sum']) * 100, 1)
 
-    percentagepricechangethirdlast = round(((thirdlastprice - secondlastprice) / totalprice['price__sum']) * 100, 1)
+        percentagepricechangethirdlast = round(((thirdlastprice - secondlastprice) / totalprice['price__sum']) * 100, 1)
 
-    return render(request=request, template_name='dashboard/hostel/index.html',
-                  context={'bookingslist': bookingslist,
-                           'totalprice': totalprice['price__sum'],
-                           'immediate_price_diff': percentagepricechange,
-                           'immediate_price_diff_sec_third': percentagepricechangethirdlast,
-                           'firstprice': firstprice,
-                           'lastprice': lastprice,
+        return render(request=request, template_name='dashboard/hostel/index.html'
+                      ,context={'bookingslist': bookingslist,
+                               'totalprice': totalprice['price__sum'],
+                               'immediate_price_diff': percentagepricechange,
+                               'immediate_price_diff_sec_third': percentagepricechangethirdlast,
+                               'firstprice': firstprice,
+                               'lastprice': lastprice,
 
-                           })
+                               }
+                      )
 
 
 # Create your views here.
 def bookings(request):
-    bookingslist = get_list_or_404(Bookhosteltable)
+    bookingslist = Bookhosteltable.objects.all()
+    if not bookingslist:
+        return render(request=request, template_name="dashboard/hostel/bookings.html",
+                      context={'bookingslist': {},
+                               'totalprice': 0,
+                               'immediate_price_diff': 0,
+                               'immediate_price_diff_sec_third': 0,
+                               'firstprice': 0,
+                               'lastprice': 0,
 
-    return render(request=request, template_name='dashboard/hostel/bookings.html',
+                               }
+                      )
+    else:
+
+        return render(request=request, template_name='dashboard/hostel/bookings.html',
                   context={'bookingslist': bookingslist})
 
 

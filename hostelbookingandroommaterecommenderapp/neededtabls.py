@@ -5,6 +5,8 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from random import choices
+
 from django.db import models
 
 
@@ -96,26 +98,39 @@ class Registration(models.Model):
     duration = models.IntegerField(blank=True, null=True)
     course = models.CharField(max_length=500, blank=True, null=True)
     regno = models.IntegerField(blank=True, null=True)
-    firstname = models.CharField(db_column='firstName', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    middlename = models.CharField(db_column='middleName', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    lastname = models.CharField(db_column='lastName', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    firstname = models.CharField(db_column='firstName', max_length=500, blank=True,
+                                 null=True)  # Field name made lowercase.
+    middlename = models.CharField(db_column='middleName', max_length=500, blank=True,
+                                  null=True)  # Field name made lowercase.
+    lastname = models.CharField(db_column='lastName', max_length=500, blank=True,
+                                null=True)  # Field name made lowercase.
     gender = models.CharField(max_length=250, blank=True, null=True)
     contactno = models.BigIntegerField(blank=True, null=True)
     emailid = models.CharField(max_length=500, blank=True, null=True)
     egycontactno = models.BigIntegerField(blank=True, null=True)
-    guardianname = models.CharField(db_column='guardianName', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    guardianrelation = models.CharField(db_column='guardianRelation', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    guardiancontactno = models.BigIntegerField(db_column='guardianContactno', blank=True, null=True)  # Field name made lowercase.
-    corresaddress = models.CharField(db_column='corresAddress', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    correscity = models.CharField(db_column='corresCIty', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    corresstate = models.CharField(db_column='corresState', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    guardianname = models.CharField(db_column='guardianName', max_length=500, blank=True,
+                                    null=True)  # Field name made lowercase.
+    guardianrelation = models.CharField(db_column='guardianRelation', max_length=500, blank=True,
+                                        null=True)  # Field name made lowercase.
+    guardiancontactno = models.BigIntegerField(db_column='guardianContactno', blank=True,
+                                               null=True)  # Field name made lowercase.
+    corresaddress = models.CharField(db_column='corresAddress', max_length=500, blank=True,
+                                     null=True)  # Field name made lowercase.
+    correscity = models.CharField(db_column='corresCIty', max_length=500, blank=True,
+                                  null=True)  # Field name made lowercase.
+    corresstate = models.CharField(db_column='corresState', max_length=500, blank=True,
+                                   null=True)  # Field name made lowercase.
     correspincode = models.IntegerField(db_column='corresPincode', blank=True, null=True)  # Field name made lowercase.
-    pmntaddress = models.CharField(db_column='pmntAddress', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    pmntcity = models.CharField(db_column='pmntCity', max_length=500, blank=True, null=True)  # Field name made lowercase.
-    pmnatetstate = models.CharField(db_column='pmnatetState', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    pmntaddress = models.CharField(db_column='pmntAddress', max_length=500, blank=True,
+                                   null=True)  # Field name made lowercase.
+    pmntcity = models.CharField(db_column='pmntCity', max_length=500, blank=True,
+                                null=True)  # Field name made lowercase.
+    pmnatetstate = models.CharField(db_column='pmnatetState', max_length=500, blank=True,
+                                    null=True)  # Field name made lowercase.
     pmntpincode = models.IntegerField(db_column='pmntPincode', blank=True, null=True)  # Field name made lowercase.
     postingdate = models.DateTimeField(db_column='postingDate', blank=True, null=True)  # Field name made lowercase.
-    updationdate = models.CharField(db_column='updationDate', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    updationdate = models.CharField(db_column='updationDate', max_length=500, blank=True,
+                                    null=True)  # Field name made lowercase.
     photo = models.CharField(max_length=225)
 
     class Meta:
@@ -133,19 +148,58 @@ class RoomLogs(models.Model):
         db_table = 'room_logs'
 
 
+# =======================rooms======================================
+# Room No.
+# Room Type
+# AC/Non AC
+# Meal
+# Bed Capacity
+# Rent
+# Status
+# class Person(models.Model):
+#     SHIRT_SIZES = (
+#         ('S', 'Small'),
+#         ('M', 'Medium'),
+#         ('L', 'Large'),
+#     )
+#     name = models.CharField(max_length=60)
+#     shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES)
+
+
 class Rooms(models.Model):
+    MEALS_STATUS = (
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+    )
+    BOOKING_STATUS = (
+        ('Booked', 'Booked'),
+        ('Vacant', 'Vacant'),
+        ('Filled', 'Filled'),
+        ('Half_full', 'Half_full'),
+    )
+    CAPACITY_STATUS = (
+        ('Empty', 'Empty'),
+        ('Filled', 'Filled'),
+        ('Half_full', 'Half_full'),
+    )
+    ROOM_TYPE = (
+        ('Double', 'Double'),
+        ('Single', 'Single'),
+        ('Triple', 'Triple'),
+    )
+    GENDER = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+
     room_no = models.IntegerField()
-    room_capacity = models.IntegerField()
-    gender = models.CharField(max_length=11)
-    fees = models.IntegerField()
-    room_capacity1 = models.IntegerField()
-    room_my = models.IntegerField()
-    one = models.CharField(max_length=20)
-    two = models.CharField(max_length=20)
-    three = models.CharField(max_length=20)
-    four = models.CharField(max_length=20)
-    five = models.CharField(max_length=20)
-    posting_date = models.DateTimeField()
+    gender = models.CharField(max_length=8, choices=GENDER)
+    room_capacity = models.CharField(max_length=10, choices=ROOM_TYPE)
+    meal = models.CharField(max_length=5, choices=MEALS_STATUS)
+    rentfee = models.IntegerField(max_length=8)
+    availbilitystatus = models.CharField(max_length=10, choices=BOOKING_STATUS)
+    photo = models.CharField(max_length=225)
+
 
     class Meta:
         managed = True

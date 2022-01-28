@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'crispy_forms',
     'bookingapp',
+    'useraccounts',
+    'roomsapp',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,7 +73,7 @@ TEMPLATES = [
         },
     },
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 WSGI_APPLICATION = 'hostelbookingandroommaterecommenderapp.wsgi.application'
 
 # Database
@@ -269,3 +271,12 @@ JAZZMIN_SETTINGS = {
     # # Add a language dropdown into the admin
     # "language_chooser": True,
 }
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# removing the password help text
+AUTH_PASSWORD_VALIDATORS = []
+
+LOGIN_URL="/login"
+LOGIN_REDIRECT_URL="/"

@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db.models import Sum
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
+
+from .forms import Bookhosteltableform
 from .models import Bookhosteltable
 
 
@@ -63,7 +65,15 @@ def bookings(request):
 
 # Create your create-views here.
 def makebookings(request):
-    return render(request=request, template_name='dashboard/hostel/booking-add.html')
+    if request.method == 'POST':
+        bookingform=Bookhosteltableform(request.POST)
+
+        if bookingform.is_valid():
+            bookingform_=bookingform.save(commit=True)
+            return redirect('Bookings')
+    else:
+        form = Bookhosteltableform()
+    return render(request=request, template_name='dashboard/hostel/booking-add.html',context={'form': form})
 
 
 # Create your edit-views here.

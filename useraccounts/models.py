@@ -35,7 +35,7 @@ class Useraccountsmodel(BaseUserManager):
 
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=30, unique=True, verbose_name="date_joined")
     date_joined = models.DateTimeField(verbose_name="date_joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last_login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -58,3 +58,24 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Student(models.Model):
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female')
+    ]
+    join_year = models.IntegerField(default=2016)
+    name_user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+    gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
+    father_name = models.CharField(max_length=200, null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    fee_receipt = models.FileField(upload_to='receipt/', null=True)
+    address = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
+    state = models.CharField(max_length=100, null=True)
+    pincode = models.IntegerField(default=382009)
+    roll_no = models.CharField(max_length=10, primary_key=True, unique=True)
+
+    def __str__(self):
+        return str(self.name_user)

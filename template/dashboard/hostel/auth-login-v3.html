@@ -4,39 +4,42 @@
 
 {% block content %}
 
-<!-- wrap @s -->
-<div class="nk-wrap nk-wrap-nosidebar">
-    <!-- content @s -->
-    <div class="nk-content ">
-        <div class="nk-split nk-split-page nk-split-md">
-            <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white w-lg-45">
+<body class="nk-body bg-white npc-general pg-auth">
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main ">
+        <!-- wrap @s -->
+        <div class="nk-wrap nk-wrap-nosidebar">
+            <!-- content @s -->
+            <div class="nk-content ">
+                <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                    <div class="card card-bordered">
+                        <div class="card-inner card-inner-lg">
+                            <form method="POST" action="">
+                                <h1>
+                                    Login
+                                </h1>
+                                {% csrf_token %}
+                                {{ login_form|crispy }}
+                                <!--                            {% if request.GET.next %}-->
+                                <!--                            <input type="hidden" name="next" value="{{request.GET.next}}">-->
+                                <!--                            {% endif %}-->
+                                <button class="btn btn-primary btn-block" type="submit">Login</button>
+                                <p class="text-center">Don't have an account yet? <a class="text-danger" href="/register">Sign Up</a></p>
 
-                <div class="nk-block nk-block-middle nk-auth-body">
+                            </form>
 
-                    <form method="POST" action="">
-                        <h1>
-                            Login
-                        </h1>
-                        {% csrf_token %}
-                        {{ login_form|crispy }}
-                        <!--                            {% if request.GET.next %}-->
-                        <!--                            <input type="hidden" name="next" value="{{request.GET.next}}">-->
-                        <!--                            {% endif %}-->
-                        <button class="btn btn-primary btn-block" type="submit">Login</button>
-                        <p class="text-center">Don't have an account yet? <a href="/register">Sign Up</a></p>
+                        </div>
 
-                    </form>
-
-
-                </div>
-
+                    </div>
+                </div><!-- nk-split -->
             </div>
-        </div><!-- nk-split -->
+        </div>
     </div>
-    <!-- wrap @e -->
-</div>
+</div><!-- nk-split -->
+<!-- wrap @e -->
+</body>
 <!-- content @e -->
-
 
 <!-- footer @s -->
 {% include 'dashboard/hostel/includes/footer.html' %}

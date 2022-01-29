@@ -3,37 +3,42 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<body class="nk-body bg-white npc-general pg-auth">
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main ">
+        <!-- wrap @s -->
+        <div class="nk-wrap nk-wrap-nosidebar">
+            <!-- content @s -->
+            <div class="nk-content ">
+                <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                    <div class="card card-bordered">
+                        <div class="card-inner card-inner-lg">
 
-<!-- wrap @s -->
-<div class="nk-wrap nk-wrap-nosidebar">
-    <!-- content @s -->
-    <div class="nk-content ">
-        <div class="nk-split nk-split-page nk-split-md">
-            <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white w-lg-45">
+                            <form method="POST">
+                                <h1>
+                                    Register
+                                </h1>
+                                {% csrf_token %}
+                                {{ register_form|crispy }}
 
-                <div class="nk-block nk-block-middle nk-auth-body">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
-                    <form method="POST">
-                        <h1>
-                            Register
-                        </h1>
-                        {% csrf_token %}
-                        {{ register_form|crispy }}
+                                <p class="text-center">Do have an account ? <a class="text-danger" href="/login">Sign In</a></p>
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-
-                        <p class="text-center">Do have an account ? <a href="/login">Sign In</a></p>
-
-                    </form><!-- form -->
+                            </form><!-- form -->
 
 
-                </div>
+                        </div>
 
+                    </div>
+                </div><!-- nk-split -->
             </div>
-        </div><!-- nk-split -->
+        </div>
     </div>
-    <!-- wrap @e -->
-</div>
+</div><!-- nk-split -->
+<!-- wrap @e -->
+</body>
 <!-- content @e -->
 
 

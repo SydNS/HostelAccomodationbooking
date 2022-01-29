@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from django.contrib.auth import login, authenticate, logout  # add this
@@ -16,7 +17,8 @@ def Registering(request):
             return redirect("bookingapp:indexroute")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
-    return render(request=request, template_name="dashboard/hostel/auth-register-v3.html", context={"register_form": form})
+    return render(request=request, template_name="dashboard/hostel/auth-register-v3.html",
+                  context={"register_form": form})
 
 
 def loginuser(request):
@@ -43,3 +45,36 @@ def Logout(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect('login')
+
+
+# profile registering
+# @login_required
+def ProfileSetting(request):
+    # Set to False initially. Code changes value to True when registration succeeds.
+    registered = False
+
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST, request.FILES)
+
+        if student_form.is_valid():
+            try:
+                user = student_form.save()
+
+                student = student_form.save(commit=False)
+                student.roll_no = user
+                student.save()
+                registered = True
+
+                return HttpResponseRedirect('/')
+            except:
+                pass
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        student_form = StudentForm()
+
+    return render(request, 'hostel/register.html', {
+        'student_form': student_form,
+        'registered': registered,
+    })

@@ -61,22 +61,35 @@ class Account(AbstractBaseUser):
         return True
 
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class Student(models.Model):
     GENDER_CHOICES = [
         ('male', 'Male'),
         ('female', 'Female')
     ]
-    join_year = models.IntegerField(default=2016)
+    YEAR = [
+        ('FIRST_YEAR', 'FIRST_YEAR'),
+        ('SECOND_YEAR', 'SECOND_YEAR'),
+        ('THIRD_YEAR', 'THIRD_YEAR'),
+        ('FORTH_YEAR', 'FORTH_YEAR'),
+    ]
+
     name_user = models.ForeignKey(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
-    father_name = models.CharField(max_length=200, null=True)
+    parent_name = models.CharField(max_length=200, null=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    fee_receipt = models.FileField(upload_to='receipt/', null=True)
+    reporting_date = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=100, null=True)
+    phonenumber = models.CharField(max_length=10)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
-    pincode = models.IntegerField(default=382009)
-    roll_no = models.CharField(max_length=10, primary_key=True, unique=True)
+    studentIdnumber = models.CharField(max_length=10)
+    level_of_study = models.CharField(max_length=11, choices=YEAR)
+    # photo_img = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
 
     def __str__(self):
         return str(self.name_user)

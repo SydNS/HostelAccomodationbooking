@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
@@ -26,6 +27,7 @@ from .models import Bookhosteltable
 #
 
 # Create your create-views here.
+@login_required
 def index(request):
     bookingslist = Bookhosteltable.objects.all()
     if not bookingslist:
@@ -68,6 +70,7 @@ def index(request):
 
 
 # Create your views here.
+@login_required
 def bookings(request):
     bookingslist = Bookhosteltable.objects.all()
     if not bookingslist:
@@ -88,6 +91,7 @@ def bookings(request):
 
 
 # Create your create-views here.
+@login_required
 def makebookings(request):
     if request.method == 'POST':
         bookingform = Bookhosteltableform(request.POST)
@@ -113,6 +117,7 @@ def makebookings(request):
 
 
 # Create your edit-views here.
+@login_required
 def editbookings(request, id):
     bookingeditable = get_object_or_404(Bookhosteltable, id=id)
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',

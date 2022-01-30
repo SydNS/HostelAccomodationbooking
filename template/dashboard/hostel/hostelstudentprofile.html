@@ -14,10 +14,10 @@
                 <div class="nk-block  nk-auth-body wide-xs">
                     <div class="card card-bordered">
                         <div class="card-inner card-inner-lg">
-                            <form method="POST">
-                                <h2>
-                                    Set up Profile
-                                </h2>
+                            <form method="POST" action="">
+                                <h1>
+                                    {{ request.user|title }}'s Profile
+                                </h1>
                                 {% csrf_token %}
                                 {{ student_form|crispy }}
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>

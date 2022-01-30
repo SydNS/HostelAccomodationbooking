@@ -142,13 +142,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Hostelbookingandroommaterecommenderapp",
+    "site_title": "Hostelbooking And Roommate Recommender App",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Hostelbookingandroommaterecommenderapp",
+    "site_header": "Hostelbooking And Roommate Recommender App",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Hostelbookingandroommaterecommenderapp",
+    "site_brand": "hostelbookingandroommaterecommenderapp",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     # "site_logo": "books/img/logo.png",
@@ -272,11 +272,10 @@ JAZZMIN_SETTINGS = {
     # "language_chooser": True,
 }
 
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # removing the password help text
 AUTH_PASSWORD_VALIDATORS = []
 
-LOGIN_URL="/login"
-LOGIN_REDIRECT_URL="/"
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"

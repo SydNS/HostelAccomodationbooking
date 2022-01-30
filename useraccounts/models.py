@@ -80,11 +80,12 @@ class Student(models.Model):
 
     name_user = models.ForeignKey(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
+    phonenumber = models.CharField(max_length=10)
     parent_name = models.CharField(max_length=200, null=True)
+    parent_phonenumber = models.CharField(max_length=10)
     date_of_birth = models.DateField(null=True, blank=True)
     reporting_date = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=100, null=True)
-    phonenumber = models.CharField(max_length=10)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
     studentIdnumber = models.CharField(max_length=10)

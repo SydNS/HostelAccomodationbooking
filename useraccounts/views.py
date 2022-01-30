@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from .forms import *
 from django.contrib.auth import login, authenticate, logout  # add this
@@ -82,12 +82,19 @@ def ProfileSetting(request):
 
 
 def Profiledetails(request):
+    currentuser = request.user
     if request.method == 'POST':
         student_form = StudentForm(request.POST, request.FILES)
 
+        # fetch the object related to passed user in the GET request
+        studentdetails_to_update = Student.objects.get(name_user=currentuser)
+
+        # pass the object as instance in form
+        studentdetails_to_update_form = StudentForm(request.POST, instance=studentdetails_to_update)
+
         if student_form.is_valid():
             try:
-                student = student_form.save(commit=True)
+                student = studentdetails_to_update_form.save(commit=True)
                 student.save()
                 registered = True
                 return HttpResponseRedirect("/profiledetails")
@@ -99,27 +106,29 @@ def Profiledetails(request):
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     elif request.method == 'GET':
+        studentdetails = Student.objects.get(name_user=request.user)
+
         student_form = StudentForm(initial={
-            'name_user': request.user,
-            'gender': request.gender,
-            'date_of_birth': request.date_of_birth,
-            'reporting_date': request.reporting_date,
-            'address': request.address,
-            'phonenumber': request.phonenumber,
-            'city': request.city,
-            'state': request.state,
-            'studentIdnumber': request.studentIdnumber,
-            'level_of_study': request.level_of_study
+            'name_user': studentdetails.name_user,
+            'gender': studentdetails.gender,
+            'date_of_birth': studentdetails.date_of_birth,
+            'reporting_date': studentdetails.reporting_date,
+            'address': studentdetails.address,
+            'parent_name': studentdetails.parent_name,
+            'phonenumber': studentdetails.phonenumber,
+            'city': studentdetails.city,
+            'state': studentdetails.state,
+            'studentIdnumber': studentdetails.studentIdnumber,
+            'level_of_study': studentdetails.level_of_study
 
         })
 
-    studentdetails = Student.objects.get(name_user=request.user)
-    age = datetime.datetime.now()
-    age = age.year
-    age = age - studentdetails.date_of_birth.year
+        age = datetime.datetime.now()
+        age = age.year
+        age = age - studentdetails.date_of_birth.year
 
-    return render(request, 'dashboard/hostel/userprofiledetails.html', {
-        'studentdetails': studentdetails,
-        'student_form': student_form,
-        'age': age
-    })
+        return render(request, 'dashboard/hostel/userprofiledetails.html', {
+            'studentdetails': studentdetails,
+            'student_form': student_form,
+            'age': age
+        })

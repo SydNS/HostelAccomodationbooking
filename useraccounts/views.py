@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+import datetime
 
 
 def Registering(request):
@@ -14,7 +15,8 @@ def Registering(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("bookingapp:indexroute")
+            # return redirect("bookingapp:indexroute")
+            return redirect("profilesetup")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="dashboard/hostel/auth-register-v3.html",
@@ -58,23 +60,66 @@ def ProfileSetting(request):
 
         if student_form.is_valid():
             try:
-                user = student_form.save()
-
-                student = student_form.save(commit=False)
-                student.roll_no = user
+                student = student_form.save(commit=True)
                 student.save()
                 registered = True
-
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect("/profiledetails")
             except:
                 pass
+        # else:
+        #     return HttpResponseRedirect('<p>Hello</p>')
 
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
-    else:
-        student_form = StudentForm()
+    elif request.method == 'GET':
+        student_form = StudentForm(initial={'name_user': request.user})
+        # student_form.fields["name_user"]=request.user
 
-    return render(request, 'hostel/register.html', {
+    return render(request, 'dashboard/hostel/hostelstudentprofile.html', {
         'student_form': student_form,
         'registered': registered,
+    })
+
+
+def Profiledetails(request):
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST, request.FILES)
+
+        if student_form.is_valid():
+            try:
+                student = student_form.save(commit=True)
+                student.save()
+                registered = True
+                return HttpResponseRedirect("/profiledetails")
+            except:
+                pass
+        # else:
+        #     return HttpResponseRedirect('<p>Hello</p>')
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    elif request.method == 'GET':
+        student_form = StudentForm(initial={
+            'name_user': request.user,
+            'gender': request.gender,
+            'date_of_birth': request.date_of_birth,
+            'reporting_date': request.reporting_date,
+            'address': request.address,
+            'phonenumber': request.phonenumber,
+            'city': request.city,
+            'state': request.state,
+            'studentIdnumber': request.studentIdnumber,
+            'level_of_study': request.level_of_study
+
+        })
+
+    studentdetails = Student.objects.get(name_user=request.user)
+    age = datetime.datetime.now()
+    age = age.year
+    age = age - studentdetails.date_of_birth.year
+
+    return render(request, 'dashboard/hostel/userprofiledetails.html', {
+        'studentdetails': studentdetails,
+        'student_form': student_form,
+        'age': age
     })

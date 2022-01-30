@@ -1,7 +1,7 @@
 from random import choices
 
 from django.db import models
-from HostelAccomodationbooking.roomsapp.models import Roommodel
+
 from django.contrib.auth.models import AbstractUser, User
 
 

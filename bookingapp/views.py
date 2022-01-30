@@ -45,27 +45,11 @@ def index(request):
         num = Bookhosteltable.objects.all()
         totalprice = Bookhosteltable.objects.all().aggregate(Sum('price'))
 
-        # working on booking price difference
-        firstprice = bookingslist[0].price
-        lastprice = bookingslist[-1].price
-        secondlastprice = bookingslist[-2].price
-        thirdlastprice = bookingslist[-3].price
-        immediate_price_diff = secondlastprice - lastprice
-
-        #  percentage price difference
-        percentagepricechange = round((immediate_price_diff / totalprice['price__sum']) * 100, 1)
-
-        percentagepricechangethirdlast = round(((thirdlastprice - secondlastprice) / totalprice['price__sum']) * 100, 1)
-
         return render(request=request, template_name='dashboard/hostel/index.html'
-                      ,context={'bookingslist': bookingslist,
-                               'totalprice': totalprice['price__sum'],
-                               'immediate_price_diff': percentagepricechange,
-                               'immediate_price_diff_sec_third': percentagepricechangethirdlast,
-                               'firstprice': firstprice,
-                               'lastprice': lastprice,
+                      , context={'bookingslist': bookingslist,
+                                 'totalprice': totalprice['price__sum'],
 
-                               }
+                                 }
                       )
 
 
@@ -87,7 +71,7 @@ def bookings(request):
     else:
 
         return render(request=request, template_name='dashboard/hostel/bookings.html',
-                  context={'bookingslist': bookingslist})
+                      context={'bookingslist': bookingslist})
 
 
 # Create your create-views here.
@@ -103,6 +87,7 @@ def makebookings(request):
 
     return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
 
+
 # def makebookings(request):
 #     if request.method == "POST":
 #         form = Bookhosteltableform(request.POST)
@@ -113,7 +98,6 @@ def makebookings(request):
 #
 #     formpassed = Bookhosteltableform()
 #     return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
-
 
 
 # Create your edit-views here.

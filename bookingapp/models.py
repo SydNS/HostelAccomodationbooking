@@ -1,5 +1,8 @@
+from random import choices
+
 from django.db import models
-from django.contrib.auth.models import AbstractUser,User
+from HostelAccomodationbooking.roomsapp.models import Roommodel
+from django.contrib.auth.models import AbstractUser, User
 
 
 # Create your models here.
@@ -12,22 +15,17 @@ from django.contrib.auth.models import AbstractUser,User
 # Payment
 
 class Bookhosteltable(models.Model):
+    PAYMENT_CHOICES = [
+        ('PAID', 'PAID'),
+        ('DUE', 'DUE'),
+    ]
     uid = models.CharField(max_length=40)
-    course = models.CharField(max_length=35)
-    emergency_no = models.IntegerField()
-    guardian_name = models.CharField(max_length=100)
-    guardian_relation = models.CharField(max_length=100)
-    guardian_no = models.CharField(max_length=20)
-    guardian_address = models.CharField(max_length=255)
+    customer_name = models.ForeignKey('useraccounts.Student', on_delete=models.CASCADE)
+    room_type = models.ForeignKey('roomsapp.Roommodel', on_delete=models.CASCADE)
     duration = models.IntegerField()
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=20)
-    room_capacity = models.IntegerField()
-    food = models.CharField(max_length=20)
-    room_alloted = models.IntegerField()
-    price = models.IntegerField()
-    booked_time = models.DateTimeField()
+    booked = models.BooleanField(default=False)
+    arrival_date = models.DateField(null=True, blank=True)
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
 
     class Meta:
         managed = True

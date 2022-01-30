@@ -4,8 +4,9 @@ from typing import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from . import models
+from django.template.context_processors import request
 
+from . import models
 
 # Create your forms here.
 from .models import Student
@@ -31,8 +32,20 @@ class NewUserForm(UserCreationForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('gender', 'father_name', 'date_of_birth', 'fee_receipt',
-                  'address', 'city', 'state', 'pincode', 'join_year')
+        fields = ('name_user', 'gender', 'parent_name', 'date_of_birth',
+                  'address', 'city', 'state', 'studentIdnumber', 'reporting_date',
+                  'level_of_study', 'phonenumber',)
+        widgets = {
+            'date_of_birth': forms.DateInput(format=('%m/%d/%Y'),
+                                             attrs={'class': 'form-control',
+                                                    'placeholder': 'Select a date',
+                                                    'type': 'date'}),
+            'reporting_date': forms.DateInput(format=('%m/%d/%Y'),
+                                              attrs={'class': 'form-control',
+                                                     'placeholder': 'Select a date',
+                                                     'type': 'date'}),
+
+        }
 
     def clean_join_year(self):
         join_year = self.cleaned_data.get('join_year')
@@ -46,9 +59,14 @@ class StudentForm(forms.ModelForm):
             raise forms.ValidationError('Please enter valid Pincode')
         return pincode
 
-    def clean_father_name(self):
-        father_name = self.cleaned_data.get('father_name')
-        if not re.match(r'[A-Za-z]{3,}', father_name):
-            raise forms.ValidationError('Name is not valid!')
-        return father_name
+    # def clean_parent_name(self):
+    #     parent_name = self.cleaned_data.get('parent_name')
+    #     if parent_name.len<8 :
+    #         raise forms.ValidationError('Name is not valid!')
+    #     return parent_name
 
+    # def clean_name_user(self):
+    #     name_user = self.cleaned_data.get('name_user')
+    #     if not request.user == name_user:
+    #         raise forms.ValidationError('Name is not valid!')
+    #     return name_user

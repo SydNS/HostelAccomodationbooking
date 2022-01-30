@@ -37,14 +37,12 @@ class Roommodel(models.Model):
     room_no = models.IntegerField()
     gender = models.CharField(max_length=8, choices=GENDER)
     room_capacity = models.CharField(max_length=10, choices=ROOM_TYPE)
-    room_class = models.CharField(max_length=10, choices=ROOM_CLASS)
     meal = models.CharField(max_length=5, choices=MEALS_STATUS)
     rentfee = models.IntegerField(max_length=10)
     availbilitystatus = models.CharField(max_length=10, choices=BOOKING_STATUS)
-    photo = models.CharField(max_length=225)
 
-    # def __str__(self):
-    #     return "self."
+    def __str__(self):
+        return str(self.room_capacity)
 
     class Meta:
         managed = True

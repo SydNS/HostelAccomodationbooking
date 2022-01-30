@@ -6,7 +6,7 @@ from .models import Useraccountsmodel, Student
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name_user','gender', 'father_name', 'date_of_birth', 'fee_receipt',
-                    'address', 'city', 'state', 'pincode', 'join_year')
-    list_filter = ('name_user', 'father_name', 'date_of_birth', 'fee_receipt',
-                   'address', 'city', 'state', 'pincode', 'join_year')
+    list_display = ('name_user', 'gender', 'parent_name', 'date_of_birth',
+                    'address', 'city', 'state', 'studentIdnumber',)
+    list_filter = ('name_user', 'parent_name', 'date_of_birth',
+                   'address', 'city', 'state', 'studentIdnumber',)

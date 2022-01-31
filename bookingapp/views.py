@@ -117,13 +117,7 @@ def bookings(request):
     bookingslist = Bookhosteltable.objects.all()
     if not bookingslist:
         return render(request=request, template_name="dashboard/hostel/bookings.html",
-                      context={'bookingslist': {},
-                               'totalprice': 0,
-                               'immediate_price_diff': 0,
-                               'immediate_price_diff_sec_third': 0,
-                               'firstprice': 0,
-                               'lastprice': 0,
-
+                      context={'bookingslist': {}
                                }
                       )
     else:
@@ -146,22 +140,19 @@ def makebookings(request):
     return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
 
 
-# def makebookings(request):
-#     if request.method == "POST":
-#         form = Bookhosteltableform(request.POST)
-#         if form.is_valid():
-#             form.save(commit=True)
-#             return redirect('indexroute')
-#     # else:
-#
-#     formpassed = Bookhosteltableform()
-#     return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
-
-
 # Create your edit-views here.
 @login_required
 def editbookings(request, id):
     bookingeditable = get_object_or_404(Bookhosteltable, id=id)
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
                   context={'bookingeditable': bookingeditable}
+                  )
+
+
+# Create your views here.
+@login_required
+def bookings_details(request,id):
+    bookingdetails = get_object_or_404(Bookhosteltable, id=id)
+    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
+                  context={'bookingeditable': bookingdetails}
                   )

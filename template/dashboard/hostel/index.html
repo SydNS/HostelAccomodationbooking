@@ -193,39 +193,36 @@
                                             </div>
                                         </div>
                                         <div class="progress-list gy-3">
-                                            <h1>
-                                                table area
-                                            </h1>
-
-
-                                        <div class="card card-preview">
-                                            <div class="card-inner">
-                                                <table class="datatable-init-export nowrap table" data-export-title="Export">
-                                                    <thead>
+                                            <div class="card card-preview">
+                                                <div class="card-inner">
+                                                    <table class="datatable-init-export nowrap table"
+                                                           data-export-title="Export">
+                                                        <thead>
                                                         <tr>
                                                             <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Salary</th>
+                                                            <th>Room Type</th>
+                                                            <th>Duration</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Arrival Date</th>
+                                                            <th>Status(Booked)</th>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {% for booking in bookingslist %}
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
-                                                            <td>2009/02/27</td>
-                                                            <td>$103,500</td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div><!-- .card-preview -->
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for booking in bookingslist %}
+
+                                                            <tr>
+                                                                <td> <a href="/admin" class="text-primary">{{booking.customer_name}}</a></td>
+                                                                <td>{{booking.room_type}}</td>
+                                                                <td>{{booking.duration}}</td>
+                                                                <td>{{booking.payment_status}}</td>
+                                                                <td>{{booking.arrival_date}}</td>
+                                                                <td>{{booking.booked}}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- .card-preview -->
 
                                         </div>
                                     </div>

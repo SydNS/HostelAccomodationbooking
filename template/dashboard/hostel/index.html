@@ -211,7 +211,7 @@
                                                         {% for booking in bookingslist %}
 
                                                             <tr>
-                                                                <td> <a href="/admin" class="text-primary">{{booking.customer_name}}</a></td>
+                                                                <td> <a href="/bookings/{{booking.id}}/" class="text-primary">{{booking.customer_name}}</a></td>
                                                                 <td>{{booking.room_type}}</td>
                                                                 <td>{{booking.duration}}</td>
                                                                 <td>{{booking.payment_status}}</td>

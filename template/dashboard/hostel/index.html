@@ -62,7 +62,7 @@
                                     <div class="card-inner">
                                         <div class="card-title-group align-start mb-0">
                                             <div class="card-title">
-                                                <h6 class="title">Total Booking Revenue</h6>
+                                                <h6 class="title">Total Bookings</h6>
                                             </div>
                                             <div class="card-tools">
                                                 <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip"
@@ -70,14 +70,14 @@
                                             </div>
                                         </div>
                                         <div class="card-amount">
-                                            <span class="amount"> {{ totalprice }} </span>
-                                            {% if immediate_price_diff_sec_third > immediate_price_diff %}
-                                            <span class="change down text-danger">
-                                                <em class="icon ni ni-arrow-long-down"></em>{{immediate_price_diff}} %
+                                            <span class="amount"> {{ totalbookings }} </span>
+                                            {% if paid_totalbookings > due_totalbookings %}
+                                            <span class="change down text-info">
+                                                <em class="icon ni ni-arrow-long-up"></em>{{paid_totalbookings}} % payment made
                                             </span>
-                                            {% elif immediate_price_diff > immediate_price_diff_sec_third %}
+                                            {% elif due_totalbookings > paid_totalbookings  %}
                                             <span class="change down text-danger">
-                                                <em class="icon ni ni-arrow-long-up"></em>{{immediate_price_diff}} %
+                                                <em class="icon ni ni-arrow-long-down"></em>{{due_totalbookings}} % payment due
                                             </span>
                                             {% endif %}
 
@@ -86,12 +86,17 @@
                                         <div class="invest-data">
                                             <div class="invest-data-amount g-2">
                                                 <div class="invest-data-history">
-                                                    <div class="title">Initail</div>
-                                                    <div class="amount">{{firstprice}}</div>
+                                                    <div class="title">Paid</div>
+                                                    <div class="amount text-success">{{paid_totalbookings}}
+                                                        <em class="icon ni ni-arrow-long-up"></em></div>
+                                                    <span class="change down "></span>
                                                 </div>
                                                 <div class="invest-data-history">
-                                                    <div class="title">Previous</div>
-                                                    <div class="amount">{{lastprice}}</div>
+                                                    <div class="title">Due</div>
+                                                    <div class="amount text-danger">{{due_totalbookings}}
+                                                        <em class="icon ni ni-arrow-long-down"></em></div>
+                                                    <span class="change down ">
+                                            </span>
                                                 </div>
                                             </div>
 
@@ -112,22 +117,22 @@
                                             </div>
                                         </div>
                                         <div class="card-amount">
-                                            <span class="amount"> 312 </span>
+                                            <span class="amount"> {{ numberofrooms }}
+                                            <span
+                                                                class="currency currency-usd">Rooms</span> </span>
                                         </div>
                                         <div class="invest-data">
                                             <div class="invest-data-amount g-2">
                                                 <div class="invest-data-history">
                                                     <div class="title">Double Rooms</div>
-                                                    <div class="amount">913</div>
+                                                    <div class="amount">{{doublerooms}}</div>
                                                 </div>
                                                 <div class="invest-data-history">
                                                     <div class="title">Single Rooms</div>
-                                                    <div class="amount">125</div>
+                                                    <div class="amount">{{singlerooms}}</div>
                                                 </div>
                                             </div>
-                                            <div class="invest-data-ck">
-                                                <canvas class="iv-data-chart" id="totalRoom"></canvas>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div><!-- .card -->
@@ -137,7 +142,7 @@
                                     <div class="card-inner">
                                         <div class="card-title-group align-start mb-0">
                                             <div class="card-title">
-                                                <h6 class="title">Expenses</h6>
+                                                <h6 class="title">Student Registered</h6>
                                             </div>
                                             <div class="card-tools">
                                                 <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip"
@@ -145,16 +150,17 @@
                                             </div>
                                         </div>
                                         <div class="card-amount">
-                                                        <span class="amount"> 79,358.50 <span
-                                                                class="currency currency-usd">USD</span>
+                                                        <span class="amount"> {{students}} <span
+                                                                class="currency currency-usd">students</span>
                                                         </span>
                                         </div>
                                         <div class="invest-data">
                                             <div class="invest-data-amount g-2">
                                                 <div class="invest-data-history">
-                                                    <div class="title">This Month</div>
-                                                    <div class="amount">3,540.59 <span
-                                                            class="currency currency-usd">USD</span></div>
+                                                    <div class="title">Gender Ratio</div>
+                                                    <div class="amount">{{students_male}}  <span class="currency currency-usd"> Male {{students_male|pluralize}}</span> :{{students_male}}<span class="currency currency-usd"> Female {{students_male|pluralize}}</span>
+
+                                                    </div>
                                                 </div>
                                                 <div class="invest-data-history">
                                                     <div class="title">This Week</div>
@@ -162,9 +168,7 @@
                                                             class="currency currency-usd">USD</span></div>
                                                 </div>
                                             </div>
-                                            <div class="invest-data-ck">
-                                                <canvas class="iv-data-chart" id="totalExpenses"></canvas>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div><!-- .card -->

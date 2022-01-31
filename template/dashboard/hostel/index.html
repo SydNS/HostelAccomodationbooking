@@ -19,39 +19,27 @@
                     <div class="nk-block-head nk-block-head-sm">
                         <div class="nk-block-between">
                             <div class="nk-block-head-content">
-                                <h1 class="nk-block-title ">Dashboard Overview</h1>
+                                {% if user.is_staff %}
+                                <h1 class="nk-block-title ">Staff Dashboard </h1>
+                                {% else %}
+                                <h1 class="nk-block-title ">{{ user|title }}'s Dashboard</h1>
+                                {% endif %}
+
                                 <div class="nk-block-des text-soft">
-                                    <p>{{ request.user|upper }} Welcome home.</p>
+                                    <p> Welcome home.</p>
                                 </div>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">
+                                {% if user.is_staff %}
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1"
-                                       data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                                     <div class="toggle-expand-content" data-content="pageMenu">
                                         <ul class="nk-block-tools g-3">
-                                            <li>
-                                                <div class="dropdown">
-                                                    <a href="#"
-                                                       class="dropdown-toggle btn btn-white btn-dim btn-outline-light"
-                                                       data-toggle="dropdown"><em
-                                                            class="d-none d-sm-inline icon ni ni-calender-date"></em><span><span
-                                                            class="d-none d-md-inline">Last</span> 30 Days</span><em
-                                                            class="dd-indc icon ni ni-chevron-right"></em></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <ul class="link-list-opt no-bdr">
-                                                            <li><a href="#"><span>Last 30 Days</span></a></li>
-                                                            <li><a href="#"><span>Last 6 Months</span></a></li>
-                                                            <li><a href="#"><span>Last 1 Years</span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="nk-block-tools-opt"><a href="#" class="btn btn-primary"><em
-                                                    class="icon ni ni-reports"></em><span>Reports</span></a></li>
+                                            <li class="nk-block-tools-opt"><a href="/admin" class="btn btn-primary"><em
+                                                    class="icon ni ni-reports"></em><span>Admin</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div><!-- .nk-block-head-content -->
                         </div><!-- .nk-block-between -->
                     </div><!-- .nk-block-head -->
@@ -75,7 +63,7 @@
                                             <span class="change down text-info">
                                                 <em class="icon ni ni-arrow-long-up"></em>{{paid_totalbookings}} % payment made
                                             </span>
-                                            {% elif due_totalbookings > paid_totalbookings  %}
+                                            {% elif due_totalbookings > paid_totalbookings %}
                                             <span class="change down text-danger">
                                                 <em class="icon ni ni-arrow-long-down"></em>{{due_totalbookings}} % payment due
                                             </span>
@@ -119,7 +107,7 @@
                                         <div class="card-amount">
                                             <span class="amount"> {{ numberofrooms }}
                                             <span
-                                                                class="currency currency-usd">Rooms</span> </span>
+                                                    class="currency currency-usd">Rooms</span> </span>
                                         </div>
                                         <div class="invest-data">
                                             <div class="invest-data-amount g-2">
@@ -158,13 +146,17 @@
                                             <div class="invest-data-amount g-2">
                                                 <div class="invest-data-history">
                                                     <div class="title">Gender Ratio</div>
-                                                    <div class="amount">{{students_male}}  <span class="currency currency-usd"> Male {{students_male|pluralize}}</span> :{{students_male}}<span class="currency currency-usd"> Female {{students_male|pluralize}}</span>
+                                                    <div class="amount">{{students_male}} <span
+                                                            class="currency currency-usd"> Male {{students_male|pluralize}}</span>
+                                                        :{{students_male}}<span class="currency currency-usd"> Female {{students_male|pluralize}}</span>
 
                                                     </div>
                                                 </div>
                                                 <div class="invest-data-history">
                                                     <div class="title">Level of Study</div>
-                                                    <div class="amount">{{students_firstyear}}  <span class="currency currency-usd">Year1 {{students_firstyear|pluralize}}</span>,{{students_thridyear}}<span class="currency currency-usd"> Year3 {{students_thridyear|pluralize}}</span>
+                                                    <div class="amount">{{students_firstyear}} <span
+                                                            class="currency currency-usd">Year1 {{students_firstyear|pluralize}}</span>,{{students_thridyear}}<span
+                                                            class="currency currency-usd"> Year3 {{students_thridyear|pluralize}}</span>
 
                                                     </div>
                                                 </div>
@@ -174,6 +166,9 @@
                                     </div>
                                 </div><!-- .card -->
                             </div><!-- .col -->
+
+                            <!--                            table only staff sees-->
+                            {% if user.is_staff %}
                             <div class="col-xxl-4">
                                 <div class="card card-bordered card-full">
                                     <div class="card-inner d-flex flex-column h-100">
@@ -205,52 +200,117 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
 
-                            <div class="col-xxl-5">
-                                <div class="card card-bordered h-100">
-                                    <div class="card-inner">
-                                        <div class="card-title-group pb-3 g-2">
-                                            <div class="card-title">
-                                                <h6 class="title">Income vs Expenses</h6>
-                                                <p>How was your income and Expenses this month.</p>
-                                            </div>
-                                            <div class="card-tools shrink-0 d-none d-sm-block">
-                                                <ul class="nav nav-switch-s2 nav-tabs bg-white">
-                                                    <li class="nav-item"><a href="#" class="nav-link">7 D</a></li>
-                                                    <li class="nav-item"><a href="#" class="nav-link active">1 M</a>
-                                                    </li>
-                                                    <li class="nav-item"><a href="#" class="nav-link">3 M</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="analytic-ov">
-                                            <div class="analytic-data-group analytic-ov-group g-3">
-                                                <div class="analytic-data analytic-ov-data">
-                                                    <div class="title text-primary">Income</div>
-                                                    <div class="amount">2.57K</div>
-                                                    <div class="change down"><em
-                                                            class="icon ni ni-arrow-long-down"></em>12.37%
-                                                    </div>
+                            <div class="col-md-6 col-xxl-3">
+                                <div class="card card-bordered card-full">
+                                    <div class="card-inner-group">
+                                        <div class="card-inner">
+                                            <div class="card-title-group">
+                                                <div class="card-title">
+                                                    <h6 class="title">New Customer</h6>
                                                 </div>
-                                                <div class="analytic-data analytic-ov-data">
-                                                    <div class="title text-danger">Expenses</div>
-                                                    <div class="amount">3.5K</div>
-                                                    <div class="change down"><em class="icon ni ni-arrow-long-up"></em>8.37%
-                                                    </div>
+                                                <div class="card-tools">
+                                                    <a href="html/hotel/customers.html" class="link">View All</a>
                                                 </div>
                                             </div>
-                                            <div class="analytic-ov-ck">
-                                                <canvas class="analytics-line-large" id="analyticOvData"></canvas>
-                                            </div>
-                                            <div class="chart-label-group ml-5">
-                                                <div class="chart-label">01 Jan, 2020</div>
-                                                <div class="chart-label d-none d-sm-block">15 Jan, 2020</div>
-                                                <div class="chart-label">30 Jan, 2020</div>
-                                            </div>
                                         </div>
+                                        <ul>
+                                            {% for item in bookingslist %}
+                                            <li>
+                                                <div class="card-inner card-inner-md">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar bg-primary-dim">
+                                                            <span>{{item.uid}}</span>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <span class="lead-text">{{item.guardian_name}}</span>
+                                                            <span class="sub-text">{{item.guardian_address}}</span>
+                                                        </div>
+                                                        <div class="user-action">
+                                                            <div class="drodown">
+                                                                <a href="#"
+                                                                   class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
+                                                                   data-toggle="dropdown" aria-expanded="false"><em
+                                                                        class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <ul class="link-list-opt no-bdr">
+                                                                        <li><a href="#"><em
+                                                                                class="icon ni ni-setting"></em><span>Action Settings</span></a>
+                                                                        </li>
+                                                                        <li><a href="#"><em
+                                                                                class="icon ni ni-notify"></em><span>Push Notification</span></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+
                                     </div>
                                 </div><!-- .card -->
                             </div><!-- .col -->
+                            <div class="col-md-6 col-xxl-4">
+                                <div class="card card-bordered card-full">
+                                    <div class="card-inner border-bottom">
+                                        <div class="card-title-group">
+                                            <div class="card-title">
+                                                <h6 class="title">Recent Activities</h6>
+                                            </div>
+                                            <div class="card-tools">
+                                                <ul class="card-tools-nav">
+                                                    <li><a href="#"><span>Cancel</span></a></li>
+                                                    <li class="active"><a href="#"><span>All</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="nk-activity">
+                                        <li class="nk-activity-item">
+                                            <div class="nk-activity-media user-avatar bg-success"><img
+                                                    src="./images/avatar/c-sm.jpg" alt=""></div>
+                                            <div class="nk-activity-data">
+                                                <div class="label">Keith Jensen requested for room.</div>
+                                                <span class="time">2 hours ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="nk-activity-item">
+                                            <div class="nk-activity-media user-avatar bg-warning">HS</div>
+                                            <div class="nk-activity-data">
+                                                <div class="label">Harry Simpson placed a Order.</div>
+                                                <span class="time">2 hours ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="nk-activity-item">
+                                            <div class="nk-activity-media user-avatar bg-azure">SM</div>
+                                            <div class="nk-activity-data">
+                                                <div class="label">Stephanie Marshall cancelled booking.</div>
+                                                <span class="time">2 hours ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="nk-activity-item">
+                                            <div class="nk-activity-media user-avatar bg-purple"><img
+                                                    src="./images/avatar/d-sm.jpg" alt=""></div>
+                                            <div class="nk-activity-data">
+                                                <div class="label">Nicholas Carr confirmed booking.</div>
+                                                <span class="time">2 hours ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="nk-activity-item">
+                                            <div class="nk-activity-media user-avatar bg-pink">TM</div>
+                                            <div class="nk-activity-data">
+                                                <div class="label">Timothy Moreno placed a Order.</div>
+                                                <span class="time">2 hours ago</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div><!-- .card -->
+                            </div><!-- .col -->
+
                             <div class="col-md-6 col-xxl-3">
                                 <div class="card card-bordered card-full">
                                     <div class="card-inner-group">
@@ -365,10 +425,11 @@
             </div>
         </div>
     </div>
-    <!-- content @e -->
+</div>
+<!-- content @e -->
 
-    <!-- footer @s -->
-    {% include 'dashboard/hostel/includes/footer.html' %}
-    <!-- footer @e -->
-    {% endblock %}
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}
 

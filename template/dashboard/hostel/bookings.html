@@ -9,8 +9,8 @@
 <div class="nk-wrap ">
     <!-- main header @s -->
     {% include 'dashboard/hostel/includes/header.html' %}
-
     <!-- main header @e -->
+
     <!-- content @s -->
     <div class="nk-content ">
         <div class="container-fluid">
@@ -21,7 +21,14 @@
                             <div class="nk-block-head-content">
                                 <h3 class="nk-block-title page-title">Booking Lists</h3>
                                 <div class="nk-block-des text-soft">
-                                    <p>You have total 2,595 booking's.</p>
+                                    <p>You have
+                                        {% if not bookingslist %}
+                                     no  booking yet.</p>
+                                    {% else %}
+                                    a total of {{ numberofbooking }} bookings.</p>
+                                    {% endif %}
+
+
                                 </div>
                             </div><!-- .nk-block-head-content -->
                             <div class="nk-block-head-content">

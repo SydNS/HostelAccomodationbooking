@@ -121,9 +121,12 @@ def bookings(request):
                                }
                       )
     else:
-
+        numberofbooking=bookingslist.count
         return render(request=request, template_name='dashboard/hostel/bookings.html',
-                      context={'bookingslist': bookingslist})
+                      context={
+                          'bookingslist': bookingslist ,
+                          'numberofbooking': numberofbooking ,
+                               })
 
 
 # Create your create-views here.

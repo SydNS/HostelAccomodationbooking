@@ -159,3 +159,13 @@ def bookings_details(request,id):
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
                   context={'bookingeditable': bookingdetails}
                   )
+
+
+# Create your views here.
+@login_required
+def bookings_delete(request,id):
+    bookingdetails = get_object_or_404(Bookhosteltable, id=id)
+
+    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
+                  context={'bookingeditable': bookingdetails}
+                  )

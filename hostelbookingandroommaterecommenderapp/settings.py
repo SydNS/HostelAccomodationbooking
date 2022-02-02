@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'hostels',
     'roomsapp',
     'jazzmin',
+    # cart
+    'cart',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,10 +81,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #     cart
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },
 ]
+
+# cart
+CART_SESSION_ID = 'cart'
 
 WSGI_APPLICATION = 'hostelbookingandroommaterecommenderapp.wsgi.application'
 
@@ -148,7 +155,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
@@ -158,7 +165,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
+    # 'allauth.account.auth_backends.AuthenticationBackend'
 ]
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

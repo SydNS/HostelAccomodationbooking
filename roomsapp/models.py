@@ -34,8 +34,8 @@ class Roommodel(models.Model):
         ('Deluxe', 'Deluxe'),
     )
 
-    room_no = models.IntegerField()
-    hostel_name = models.ForeignKey('hostels.name', on_delete=models.CASCADE)
+    room_no = models.CharField(max_length=4)
+    hostel_name = models.ForeignKey("hostels.Hostel", on_delete=models.CASCADE)
     gender = models.CharField(max_length=8, choices=GENDER)
     room_capacity = models.CharField(max_length=10, choices=ROOM_TYPE)
     meal = models.CharField(max_length=5, choices=MEALS_STATUS)

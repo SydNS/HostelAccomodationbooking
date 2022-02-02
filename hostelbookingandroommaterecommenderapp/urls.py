@@ -23,4 +23,5 @@ urlpatterns = [
                   path('', include('bookingapp.urls'), name='bookingapp'),
                   path('', include('useraccounts.urls'), name='useraccounts'),
                   path('', include('hostels.urls'), name='hostels'),
+                  path('', include('roomsapp.urls'), name='roomsapp'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

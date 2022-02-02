@@ -19,14 +19,18 @@ class Bookhosteltable(models.Model):
         ('PAID', 'PAID'),
         ('DUE', 'DUE'),
     ]
+    DURATION_SEMESTER = [
+        ('1 SEMESTER', '1 SEMESTER'),
+        ('2 SEMESTER', '2 SEMESTER'),
+    ]
     uid = models.CharField(max_length=40)
     customer_name = models.ForeignKey('useraccounts.Student', on_delete=models.CASCADE)
     room_type = models.ForeignKey('roomsapp.Roommodel', on_delete=models.CASCADE)
-    duration = models.IntegerField()
-    booked = models.BooleanField(default=False)
+    duration = models.CharField(max_length=10, choices=DURATION_SEMESTER)
     arrival_date = models.DateField(null=True, blank=True)
     payment_status = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
 
     class Meta:
         managed = True
         db_table = 'bookhostel_table'
+        verbose_name_plural = "Bookings"

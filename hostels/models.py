@@ -20,8 +20,8 @@ class Hostel(models.Model):
     total_available_rooms = models.IntegerField(default=0)  # total available rooms for booking purposes
     total_booked_rooms = models.IntegerField(default=0)  # total rooms that are already booked
     ratings = models.IntegerField(default=1, choices=RATING_CHOICES)  # total rooms that are already booked
-    number_of_singlerooms = models.IntegerField()  # total rooms that are already booked
-    number_of_doublerooms = models.IntegerField()
+    number_of_singlerooms = models.IntegerField(default=0)  # total rooms that are already booked
+    number_of_doublerooms = models.IntegerField(default=0)
     singleroom_price = models.IntegerField(default=1500000)  # total rooms that are already booked
     doubleroom_price = models.IntegerField(default=2000000)  # total rooms that are already booked
 

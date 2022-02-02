@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 class Useraccountsmodel(BaseUserManager):
+    email = models.EmailField(unique=True)
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError("Users must have an email")

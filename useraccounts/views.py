@@ -11,6 +11,13 @@ import datetime
 def Registering(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
+
+        email = request.POST['email']
+        if User.objects.filter(email=email).exists():
+            messages.error(request, ' This ' +email +'is already in use')
+            return render(request=request, template_name="dashboard/hostel/auth-register-v3.html",
+                          context={"register_form": form})
+
         if form.is_valid():
             user = form.save()
             login(request, user)

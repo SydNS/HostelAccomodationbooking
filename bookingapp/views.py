@@ -121,12 +121,12 @@ def bookings(request):
                                }
                       )
     else:
-        numberofbooking=bookingslist.count
+        numberofbooking = bookingslist.count
         return render(request=request, template_name='dashboard/hostel/bookings.html',
                       context={
-                          'bookingslist': bookingslist ,
-                          'numberofbooking': numberofbooking ,
-                               })
+                          'bookingslist': bookingslist,
+                          'numberofbooking': numberofbooking,
+                      })
 
 
 # Create your create-views here.
@@ -154,7 +154,7 @@ def editbookings(request, id):
 
 # Create your views here.
 @login_required
-def bookings_details(request,id):
+def bookings_details(request, id):
     bookingdetails = get_object_or_404(Bookhosteltable, id=id)
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
                   context={'bookingeditable': bookingdetails}
@@ -163,9 +163,28 @@ def bookings_details(request,id):
 
 # Create your views here.
 @login_required
-def bookings_delete(request,id):
+def bookings_delete(request, id):
     bookingdetails = get_object_or_404(Bookhosteltable, id=id)
 
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
                   context={'bookingeditable': bookingdetails}
                   )
+
+
+##########from details page#
+# Create your create-views here.
+@login_required
+def makebookingsfromdeatils(request, id):
+    if request.method == 'POST':
+        bookingform = Bookhosteltableform(request.POST)
+        if bookingform.is_valid():
+            bookingform_ = bookingform.save(commit=True)
+            return redirect('indexroute')
+    else:
+        hostel_obj = Bookhosteltable.objects.get(id=id)
+        hostelName = hostel_obj.hostel_name
+        userNamenow = request.user
+
+        formpassed = Bookhosteltableform(initial={'hostel_name': hostelName, 'customer_name': userNamenow})
+
+    return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})

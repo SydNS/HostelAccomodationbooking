@@ -5,8 +5,8 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 
-from .forms import HostelForm, RoomForm
-from .models import Hostel
+from .forms import  RoomForm
+from hostels.models import Hostel
 from roomsapp.models import Roommodel
 from useraccounts.models import Student
 
@@ -34,7 +34,7 @@ def rooms(request):
         else:
             # totalhostels overall
             totalhostels = hostelsobj.count()
-            formpassed = HostelForm()
+            formpassed = RoomForm()
 
             # room types available     roomsobj = Roommodel.objects.all()
             numberofrooms = roomsobj.count
@@ -111,7 +111,7 @@ def add_room(request):
 # Create your edit-views here.bookingform_
 @login_required
 def edit_room(request, id):
-    bookingeditable = get_object_or_404(HostelForm, id=id)
+    bookingeditable = get_object_or_404(RoomForm, id=id)
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
                   context={'bookingeditable': bookingeditable}
                   )
@@ -133,8 +133,8 @@ def room_details(request, id):
 # Create your views here.
 @login_required
 def delete_room(request, id):
-    bookingdetails = get_object_or_404(Hostel, id=id)
+    hostel_to_delete = get_object_or_404(Roommodel, id=id)
 
     return render(request=request, template_name='dashboard/hostel/booking-edit.html',
-                  context={'bookingeditable': bookingdetails}
+                  context={'bookingeditable': hostel_to_delete}
                   )

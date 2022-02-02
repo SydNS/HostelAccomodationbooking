@@ -16,5 +16,5 @@ from .models import Roommodel
 @admin.register(Roommodel)
 class RoommodelAdmmin(admin.ModelAdmin):
     list_filter = ('gender', 'room_capacity', 'availbilitystatus',)
-    list_display = ('room_no','gender', 'room_capacity', 'availbilitystatus', 'meal', 'rentfee',)
+    list_display = ('room_no','gender', 'room_capacity', 'availbilitystatus',)
     search_fields = ('room_no', 'room_capacity',)

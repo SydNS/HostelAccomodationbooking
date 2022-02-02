@@ -32,48 +32,55 @@ def hostels(request):
     studentlistobj = Student.objects.all()
 
     print(len(roomsobj))
-
-    if not hostelsobj:
-        return render(request=request, template_name="dashboard/hostel/hostelslistandimages.html",
-                      context={'hostelsobj': {}
-                               }
-                      )
+    if request.method == 'POST':
+        bookingform = HostelForm(request.POST)
+        if bookingform.is_valid():
+            bookingform_ = bookingform.save(commit=True)
+            return redirect('hostels')
     else:
-        # totalhostels overall
-        totalhostels = hostelsobj.count()
+        if not hostelsobj:
+            return render(request=request, template_name="dashboard/hostel/hostelslistandimages.html",
+                          context={'hostelsobj': {}
+                                   }
+                          )
+        else:
+            # totalhostels overall
+            totalhostels = hostelsobj.count()
+            formpassed = HostelForm()
+
+            # room types available     roomsobj = Roommodel.objects.all()
+            numberofrooms = roomsobj.count
+            singlerooms = roomsobj.filter(room_capacity="Single").count
+            doublerooms = roomsobj.filter(room_capacity="Double").count
+
+            Booked = roomsobj.filter(availbilitystatus="Booked").count
+            Vacant = roomsobj.filter(availbilitystatus="Vacant").count
+            Half_full = roomsobj.filter(availbilitystatus="Booked").count
+            Filled = roomsobj.filter(availbilitystatus="Filled").count
+
+            return render(request=request, template_name='dashboard/hostel/hostelslistandimages.html'
+                          , context={
+                    'hostelsobj': hostelsobj,
+                    'totalhostels': totalhostels,
+                    'addhostelform': formpassed,
 
 
-        # room types available     roomsobj = Roommodel.objects.all()
-        numberofrooms = roomsobj.count
-        singlerooms = roomsobj.filter(room_capacity="Single").count
-        doublerooms = roomsobj.filter(room_capacity="Double").count
+                    # rooms information
+                    'roomsobj': roomsobj,
+                    'numberofrooms': numberofrooms,
 
-        Booked = roomsobj.filter(availbilitystatus="Booked").count
-        Vacant = roomsobj.filter(availbilitystatus="Vacant").count
-        Half_full = roomsobj.filter(availbilitystatus="Booked").count
-        Filled = roomsobj.filter(availbilitystatus="Filled").count
+                    # type
+                    'singlerooms': singlerooms,
+                    'doublerooms': doublerooms,
 
-        return render(request=request, template_name='dashboard/hostel/hostelslistandimages.html'
-                      , context={
-                'hostelsobj': hostelsobj,
-                'totalhostels': totalhostels,
+                    # availbilitystatus
+                    'Booked': Booked,
+                    'Vacant': Vacant,
+                    'Half_full': Half_full,
+                    'Filled': Filled,
 
-                # rooms information
-                'roomsobj': roomsobj,
-                'numberofrooms': numberofrooms,
-
-                # type
-                'singlerooms': singlerooms,
-                'doublerooms': doublerooms,
-
-                # availbilitystatus
-                'Booked': Booked,
-                'Vacant': Vacant,
-                'Half_full': Half_full,
-                'Filled': Filled,
-
-            }
-                      )
+                }
+                          )
 
 
 # Create your views here.

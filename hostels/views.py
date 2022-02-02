@@ -2,6 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 
 from .forms import HostelForm
@@ -32,11 +33,12 @@ def hostels(request):
     studentlistobj = Student.objects.all()
 
     print(len(roomsobj))
-    if request.method == 'POST':
+    if request.method == "POST":
         bookingform = HostelForm(request.POST)
         if bookingform.is_valid():
             bookingform_ = bookingform.save(commit=True)
-            return redirect('hostels')
+            bookingform_.save()
+            return HttpResponseRedirect('hostels')
     else:
         if not hostelsobj:
             return render(request=request, template_name="dashboard/hostel/hostelslistandimages.html",
@@ -63,7 +65,6 @@ def hostels(request):
                     'hostelsobj': hostelsobj,
                     'totalhostels': totalhostels,
                     'addhostelform': formpassed,
-
 
                     # rooms information
                     'roomsobj': roomsobj,
@@ -104,18 +105,18 @@ def hostel(request):
 # Create your create-views here.
 @login_required
 def makehostels(request):
-    if request.method == 'POST':
+    formpassed = HostelForm()
+    if request.method == "POST":
         bookingform = HostelForm(request.POST)
         if bookingform.is_valid():
             bookingform_ = bookingform.save(commit=True)
-            return redirect('indexroute')
+            bookingform_.save()
+            return redirect('hostels')
     else:
-        formpassed = HostelForm()
-
-    return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
+        return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
 
 
-# Create your edit-views here.
+# Create your edit-views here.bookingform_
 @login_required
 def edithostel(request, id):
     bookingeditable = get_object_or_404(HostelForm, id=id)
@@ -127,9 +128,13 @@ def edithostel(request, id):
 # Create your views here.
 @login_required
 def hostel_details(request, id):
-    bookingdetails = get_object_or_404(HostelForm, id=id)
-    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
-                  context={'bookingeditable': bookingdetails}
+    hostel_details = get_object_or_404(Hostel, id=id)
+    ratings=hostel_details.ratings
+    return render(request=request, template_name='dashboard/hostel/hosteldetails.html',
+                  context={
+                      'hostel_details': hostel_details,
+                      'ratings': range(ratings),
+                           }
                   )
 
 

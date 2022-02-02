@@ -7,9 +7,9 @@ from .models import Bookhosteltable
 
 @admin.register(Bookhosteltable)
 class BookhosteltableAdmin(admin.ModelAdmin):
-    list_display = ('uid',   'customer_name', 'room_type', 'duration', 'payment_status','booked','arrival_date', )
-    list_filter = ('uid',  'customer_name', 'room_type', 'duration','payment_status','booked','arrival_date',)
-    search_fields = ('uid',   'customer_name', 'room_type', 'duration', 'payment_status','booked','arrival_date',)
+    list_display = ('uid',   'customer_name', 'room_type', 'duration', 'payment_status','arrival_date', )
+    list_filter = ('uid',  'customer_name', 'room_type', 'duration','payment_status','arrival_date',)
+    search_fields = ('uid',   'customer_name', 'room_type', 'duration', 'payment_status','arrival_date',)
 
 #
 # class Bookhosteltable(models.Model):

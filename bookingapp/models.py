@@ -23,7 +23,7 @@ class Bookhosteltable(models.Model):
         ('1 SEMESTER', '1 SEMESTER'),
         ('2 SEMESTER', '2 SEMESTER'),
     ]
-    uid = models.CharField(max_length=40)
+    hostel_name = models.ForeignKey('hostels.Hostel', on_delete=models.CASCADE)
     customer_name = models.ForeignKey('useraccounts.Student', on_delete=models.CASCADE)
     room_type = models.ForeignKey('roomsapp.Roommodel', on_delete=models.CASCADE)
     duration = models.CharField(max_length=10, choices=DURATION_SEMESTER)

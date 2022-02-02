@@ -7,6 +7,7 @@ from .forms import Bookhosteltableform
 from .models import Bookhosteltable
 from roomsapp.models import Roommodel
 from useraccounts.models import Student
+from hostels.models import Hostel
 
 
 #
@@ -24,6 +25,8 @@ from useraccounts.models import Student
 #     payment_status = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
 
 # Create your create-views here.
+
+
 @login_required
 def index(request):
     bookingslist = Bookhosteltable.objects.all()
@@ -174,15 +177,17 @@ def bookings_delete(request, id):
 ##########from details page#
 # Create your create-views here.
 @login_required
-def makebookingsfromdeatils(request, id):
+def makebookingsfromdetails(request, id):
+    hostel_obj = Hostel.objects.get(id=id)
     if request.method == 'POST':
         bookingform = Bookhosteltableform(request.POST)
         if bookingform.is_valid():
             bookingform_ = bookingform.save(commit=True)
-            return redirect('indexroute')
+            return redirect('bookingapp:indexroute')
     else:
-        hostel_obj = Bookhosteltable.objects.get(id=id)
-        hostelName = hostel_obj.hostel_name
+        hostel_obj = Hostel.objects.get(id=id)
+        print(hostel_obj)
+        hostelName = hostel_obj
         userNamenow = request.user
 
         formpassed = Bookhosteltableform(initial={'hostel_name': hostelName, 'customer_name': userNamenow})

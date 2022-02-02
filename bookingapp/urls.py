@@ -12,7 +12,7 @@ urlpatterns = [
     # # bookings details
     path('bookings/<int:id>/', views.bookings_details, name='bookings_details'),
     # # bookings details from details of hostels
-    path('booking/<int:id>/', views.makebookingsfromdeatils, name='booking_from_details'),
+    path('booking/<int:id>/', views.makebookingsfromdetails, name='booking_from_details'),
     # # bookings deletion
     path('delete_bookings/<int:id>/', views.bookings_delete, name='bookings_delete'),
     # path('Bookings/<int:id>/', views.Bookings, name='Bookings_Details'),

@@ -18,10 +18,15 @@ class NewUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")
+        labels = {
+            "username": "Username", "email": "Email Address",
+            "password1": "Password", "password2": "Confirm Password"
+        }
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+
         if commit:
             user.save()
         return user
@@ -42,7 +47,7 @@ class StudentForm(forms.ModelForm):
         self.fields['phonenumber'].required = True
         self.fields['reporting_date'].required = True
         self.fields['studentIdnumber'].required = True
-        self.fields['state'].required = True
+        # self.fields['state'].required = True
 
     class Meta:
         model = Student

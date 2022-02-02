@@ -1,6 +1,6 @@
 from django import forms
 
-from HostelAccomodationbooking.hostels.models import Hostel
+from  .models import Hostel
 
 
 class HostelForm(forms.ModelForm):

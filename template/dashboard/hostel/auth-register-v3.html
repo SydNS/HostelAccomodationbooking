@@ -21,10 +21,23 @@
                                 </h1>
                                 {% csrf_token %}
                                 {{ register_form|crispy }}
+                                {% if messages %}
+                                {% for message in messages %}
+                                {% if message.tags %}
+                                {{register_form.email}}
+                                <script >
+                                alert("{{ message }}")</script>
+                                {% endif %}
+
+                                {% endfor %}
+
+                                {% endif %}
+
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 
-                                <p class="text-center">Do have an account ? <a class="text-danger" href="/login">Sign In</a></p>
+                                <p class="text-center">Do have an account ? <a class="text-danger" href="/login">Sign
+                                    In</a></p>
 
                             </form><!-- form -->
 

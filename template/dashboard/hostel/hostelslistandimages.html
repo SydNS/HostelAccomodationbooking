@@ -57,7 +57,7 @@
                         <div class="col-xxl-3 col-lg-4 col-sm-6">
                             <div class="card card-bordered product-card">
                                 <div class="product-thumb">
-                                    <a href="html/product-details.html">
+                                    <a href="/hostel/{{hostel.id}}">
                                         <img class="card-img-top" src="{{hostel.photo.url}}" alt="">
                                     </a>
                                     <ul class="product-badges">
@@ -91,7 +91,7 @@
                     </div><!-- .nk-block-head -->
                     <div class="nk-block">
                         <div class="row g-3">
-                            <form method="POST">
+                            <form method="POST" action="">
                                 {% csrf_token %}
 
                                 <div class="form-group" action="">

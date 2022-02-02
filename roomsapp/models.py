@@ -35,10 +35,10 @@ class Roommodel(models.Model):
     )
 
     room_no = models.IntegerField()
+    hostel_name = models.ForeignKey('hostels.name', on_delete=models.CASCADE)
     gender = models.CharField(max_length=8, choices=GENDER)
     room_capacity = models.CharField(max_length=10, choices=ROOM_TYPE)
     meal = models.CharField(max_length=5, choices=MEALS_STATUS)
-    rentfee = models.IntegerField(max_length=10)
     availbilitystatus = models.CharField(max_length=10, choices=BOOKING_STATUS)
 
     def __str__(self):

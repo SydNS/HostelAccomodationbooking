@@ -93,5 +93,9 @@ class Student(models.Model):
     level_of_study = models.CharField(max_length=11, choices=YEAR)
     # photo_img = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = "Student Accounts"
+
+
     def __str__(self):
         return str(self.name_user)

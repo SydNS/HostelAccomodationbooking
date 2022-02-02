@@ -47,3 +47,6 @@ class Roommodel(models.Model):
     class Meta:
         managed = True
         db_table = 'rooms'
+        verbose_name = "Room"
+        verbose_name_plural = "Rooms"
+

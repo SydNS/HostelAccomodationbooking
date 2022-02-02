@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 
-from .forms import  RoomForm
+from .forms import RoomForm
 from hostels.models import Hostel
 from roomsapp.models import Roommodel
 from useraccounts.models import Student

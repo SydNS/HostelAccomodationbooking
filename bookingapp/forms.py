@@ -21,7 +21,7 @@ class Bookhosteltableform(ModelForm):
         widgets = {
             'arrival_date': forms.DateInput(format=('%m/%d/%Y'),
                                              attrs={'class': 'form-control',
-                                                    'placeholder': 'Select a date',
+                                                    'placeholder': 'Select Reporting Date',
                                                     'type': 'date'}),
 
         }

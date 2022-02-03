@@ -39,6 +39,7 @@ class StudentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['date_of_birth'].required = True
+        # self.fields['photo'].required = True
         self.fields['gender'].required = True
         self.fields['parent_name'].required = True
         self.fields['address'].required = True
@@ -51,7 +52,7 @@ class StudentForm(forms.ModelForm):
 
     class Meta:
         model = Student
-        fields = ('name_user', 'gender', 'parent_name', 'date_of_birth',
+        fields = ('name_user', 'photo', 'gender', 'parent_name', 'date_of_birth',
                   'address', 'city', 'state', 'studentIdnumber', 'reporting_date',
                   'level_of_study', 'phonenumber',)
         widgets = {

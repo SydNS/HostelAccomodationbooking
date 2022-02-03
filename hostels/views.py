@@ -159,6 +159,7 @@ def hostel_details(request, id):
 
 
 # Create your views here.
+@staff_member_required
 @login_required
 def hostel_delete(request, id):
     hostel_to_delete = get_object_or_404(Hostel, id=id)

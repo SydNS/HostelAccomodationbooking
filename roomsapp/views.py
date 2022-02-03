@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -111,6 +112,7 @@ def room_details(request, id):
 
 
 # Create your views here.
+@staff_member_required
 @login_required
 def delete_room(request, id):
     room_to_delete = get_object_or_404(Roommodel, id=id)

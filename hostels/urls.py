@@ -6,8 +6,8 @@ app_name="hostels"
 urlpatterns = [
 
     path('hostels', views.hostels, name='hostels'),
-    path('record_hostel/', views.makehostels, name='Make_Bookings'),
-    path('edit_hostel/<int:id>/', views.edithostel, name='Edit_Bookings'),
+    path('record_hostel/', views.makehostels, name='record_hostel'),
+    path('edit_hostel/<int:id>/', views.edithostel, name='edit_hostel'),
     # # bookings details
     path('hostel/<int:id>/', views.hostel_details, name='hostel_details'),
     # # bookings deletion

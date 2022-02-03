@@ -49,13 +49,14 @@
                                 <a href="/hostels" class="nk-menu-link"><span
                                         class="nk-menu-text">All hostels</span></a>
                             </li>
+
+                            {% if user.is_staff %}
                             <li class="nk-menu-item">
                                 <a href="/record_hostel" class="nk-menu-link"><span
                                         class="nk-menu-text">Add hostel</span></a>
                             </li>
-                            <li class="nk-menu-item">
-                                <a href="html/hotel/booking-edit.html" class="nk-menu-link"><span class="nk-menu-text">Edit Booking</span></a>
-                            </li>
+                            {% endif %}
+
                         </ul>
                     </li>
                     <li class="nk-menu-item has-sub">
@@ -67,13 +68,13 @@
                             <li class="nk-menu-item">
                                 <a href="/bookings" class="nk-menu-link"><span class="nk-menu-text">All Bookings</span></a>
                             </li>
+                            {% if user.is_staff %}
                             <li class="nk-menu-item">
                                 <a href="/make_booking" class="nk-menu-link"><span
                                         class="nk-menu-text">Add Booking</span></a>
                             </li>
-                            <li class="nk-menu-item">
-                                <a href="html/hotel/booking-edit.html" class="nk-menu-link"><span class="nk-menu-text">Edit Booking</span></a>
-                            </li>
+                            {% endif %}
+
                         </ul>
                     </li>
                     <li class="nk-menu-item has-sub">

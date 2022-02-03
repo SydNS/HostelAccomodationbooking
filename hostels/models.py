@@ -14,7 +14,7 @@ class Hostel(models.Model):
     ]
 
     name = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to='images/')
+    photo = models.ImageField(upload_to='hostels/')
     location = models.CharField(max_length=50)
     total_rooms = models.IntegerField(default=0)  # total rooms in the hostel
     total_available_rooms = models.IntegerField(default=0)  # total available rooms for booking purposes

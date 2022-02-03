@@ -1,4 +1,5 @@
 # Create your views here.
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -37,8 +38,12 @@ def hostels(request):
         bookingform = HostelForm(request.POST)
         if bookingform.is_valid():
             bookingform_ = bookingform.save(commit=True)
-            bookingform_.save()
+
             return HttpResponseRedirect('hostels')
+        else:
+            return HttpResponseRedirect('hostels')
+
+
     else:
         if not hostelsobj:
             return render(request=request, template_name="dashboard/hostel/hostelslistandimages.html",
@@ -107,13 +112,16 @@ def hostel(request):
 def makehostels(request):
     formpassed = HostelForm()
     if request.method == "POST":
-        bookingform = HostelForm(request.POST)
+        bookingform = HostelForm(request.POST, request.FILES)
+
+        # print(bookingform)
         if bookingform.is_valid():
-            bookingform_ = bookingform.save(commit=True)
-            bookingform_.save()
-            return redirect('hostels')
-    else:
-        return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
+            bookingform.save()
+            print(bookingform)
+            return redirect('hostels:hostels')
+
+    return render(request=request, template_name='dashboard/hostel/add_new_hostel.html',
+                      context={'form': formpassed})
 
 
 # Create your edit-views here.bookingform_
@@ -129,12 +137,12 @@ def edithostel(request, id):
 @login_required
 def hostel_details(request, id):
     hostel_details = get_object_or_404(Hostel, id=id)
-    ratings=hostel_details.ratings
+    ratings = hostel_details.ratings
     return render(request=request, template_name='dashboard/hostel/hosteldetails.html',
                   context={
                       'hostel_details': hostel_details,
                       'ratings': range(ratings),
-                           }
+                  }
                   )
 
 

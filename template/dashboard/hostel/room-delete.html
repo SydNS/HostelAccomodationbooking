@@ -1,0 +1,104 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Delete {{hostel_to_delete}}</h3>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="row gy-6">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="default-textarea">Are You Sure You Want to
+                                                Delete Room-{{room_to_delete.room_no}}</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    class="btn btn-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#modalZoom">
+                                                <em class="icon ni ni-trash"></em><span>Delete Room</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!--row-->
+                        </div><!-- .card-inner-group -->
+                    </div><!-- .card -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+<!-- content @e -->
+
+
+<!--modalZoom-->
+<div class="modal fade zoom" tabindex="-1"
+     id="modalZoom">
+    <div class="modal-dialog"
+         role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Modal Title</h5>
+                <a href="#" class="close"
+                   data-dismiss="modal"
+                   aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit
+                    amet consectetur
+                    adipisicing elit.
+                    Voluptatem similique
+                    earum necessitatibus
+                    nesciunt! Quia id
+                    expedita asperiores
+                    voluptatem odit quis
+                    fugit sapiente assumenda
+                    sunt voluptatibus atque
+                    facere autem, omnis
+                    explicabo.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <span class="sub-text">Modal Footer Text</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Zoom -->
+
+
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

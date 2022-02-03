@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404, redirec
 
 from .forms import RoomForm
 from hostels.models import Hostel
-from roomsapp.models import Roommodel
+from .models import Roommodel
 from useraccounts.models import Student
 
 
@@ -20,16 +20,16 @@ def rooms(request):
 
     print(len(roomsobj))
     if request.method == "POST":
-        bookingform = HostelForm(request.POST)
-        if bookingform.is_valid():
-            bookingform_ = bookingform.save(commit=True)
+        formpassed = RoomForm(request.POST)
+        if formpassed.is_valid():
+            bookingform_ = formpassed.save(commit=True)
             bookingform_.save()
             return HttpResponseRedirect('hostels')
     else:
         if not roomsobj:
+            formpassed = RoomForm()
             return render(request=request, template_name="dashboard/hostel/rooms-list.html",
-                          context={'roomsobj': {}
-                                   }
+                          context={'roomsobj': {}, 'formpassed': formpassed}
                           )
         else:
             # totalhostels overall
@@ -55,7 +55,7 @@ def rooms(request):
                           , context={
                     'hostelsobj': hostelsobj,
                     'totalhostels': totalhostels,
-                    'addhostelform': formpassed,
+                    'formpassed': formpassed,
 
                     # rooms information
                     'roomsobj': roomsobj,
@@ -74,26 +74,6 @@ def rooms(request):
                 }
                           )
 
-
-# Create your views here.
-# @login_required
-# def hostel(request):
-#     hostelsobj = Hostel.objects.all()
-#     if not hostelsobj:
-#         return render(request=request, template_name="dashboard/hostel/hostels.html",
-#                       context={'hostelsobj': {}
-#                                }
-#                       )
-#     else:
-#         numberofbooking = hostelsobj.count
-#         return render(request=request, template_name='dashboard/hostel/hostels.html',
-#                       context={
-#                           'hostelsobj': hostelsobj,
-#                           'numberofbooking': numberofbooking,
-#                       })
-
-
-# Create your create-views here.
 
 @login_required
 def add_room(request):
@@ -120,7 +100,7 @@ def edit_room(request, id):
 # Create your views here.
 @login_required
 def room_details(request, id):
-    hostel_details = get_object_or_404(Hostel, id=id)
+    hostel_details = get_object_or_404(Roommodel, id=id)
     ratings = hostel_details.ratings
     return render(request=request, template_name='dashboard/hostel/hosteldetails.html',
                   context={
@@ -133,8 +113,11 @@ def room_details(request, id):
 # Create your views here.
 @login_required
 def delete_room(request, id):
-    hostel_to_delete = get_object_or_404(Roommodel, id=id)
+    room_to_delete = get_object_or_404(Roommodel, id=id)
+    if request.method == "POST":
+        room_to_delete.delete()
+        return redirect('rooms')
 
-    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
-                  context={'bookingeditable': hostel_to_delete}
+    return render(request=request, template_name='dashboard/hostel/room-delete.html',
+                  context={'room_to_delete': room_to_delete}
                   )

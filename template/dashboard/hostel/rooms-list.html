@@ -140,9 +140,20 @@
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <ul class="link-list-opt no-bdr">
 
-                                                                        <li><a href="/room/{{room.id}}"><em
-                                                                                class="icon ni ni-eye"></em><span>View Details</span></a>
+                                                                        <li>
+                                                                            <a href="/room/{{room.id}}"><em
+                                                                                    class="icon ni ni-eye"></em><span>View Details</span></a>
                                                                         </li>
+                                                                        {% if user.is_staff %}
+                                                                        <li>
+                                                                            <a href="/edit_room/{{room.id}}"><em
+                                                                                    class="icon ni ni-pen2"></em><span>Edit Room</span></a>
+                                                                        </li>
+                                                                        <li>
+                                                                             <a href="/delete_room/{{room.id}}"><em
+                                                                                    class="icon ni ni-trash"></em><span>Delete Room</span></a>
+                                                                        </li>
+                                                                        {% endif %}
 
 
                                                                     </ul>
@@ -185,7 +196,7 @@
                                     {% csrf_token %}
 
                                     <div class="form-group" action="">
-                                        {{ addhostelform|crispy }}
+                                        {{ formpassed|crispy }}
                                         <div class="col-12">
                                             <button class="btn btn-primary"><em
                                                     class="icon ni ni-plus"></em><span>Add New Room</span>
@@ -202,6 +213,7 @@
         </div>
     </div>
 </div>
+
 <!-- content @e -->
 
 <!-- content @e -->

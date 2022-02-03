@@ -33,7 +33,7 @@ def index(request):
     roomsobj = Roommodel.objects.all()
     studentlistobj = Student.objects.all()
 
-    print(len(roomsobj))
+    # print(len(roomsobj))
 
     if not bookingslist:
         return render(request=request, template_name="dashboard/hostel/index.html",
@@ -186,7 +186,7 @@ def makebookingsfromdetails(request, id):
             return redirect('bookingapp:indexroute')
     else:
         hostel_obj = Hostel.objects.get(id=id)
-        print(hostel_obj)
+        # print(hostel_obj)
         hostelName = hostel_obj
         userNamenow = request.user
 

@@ -1,5 +1,6 @@
 {% extends 'dashboard/hostel/base.html' %}
 <!--{% load static %}-->
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- sidebar @s -->
@@ -17,7 +18,7 @@
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
-                            <h3 class="nk-block-title page-title">Edit Booking</h3>
+                            <h3 class="nk-block-title page-title">Edit {{hostel_to_edit}}</h3>
                         </div><!-- .nk-block-head-content -->
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
@@ -25,56 +26,27 @@
                     <div class="card card-bordered">
                         <div class="card-inner">
                             <div class="row gy-4">
+                                <form method="POST" action="#" enctype="multipart/form-data">
+                                    {% csrf_token %}
 
+                                    <div class="form-group">
+                                        <div class="row gy-4">
+<!--                                            {{ editform|crispy}}-->
+                                            {% for field in editform %}
+                                            <div class="col-md-6 col-lg-4 col-xxl-3">
+                                                <div class="form-group">
 
-                                <div class="col-md-6 col-lg-4 col-xxl-3">
-                                    <div class="form-group">
-                                        <label class="form-label">Arrived Date</label>
-                                        <div class="form-control-wrap">
-                                            <div class="form-icon form-icon-right">
-                                                <em class="icon ni ni-calendar"></em>
+                                                    <div class="form-control-wrap">
+                                                        {{ field|as_crispy_field }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control date-picker"
-                                                   data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd"
-                                                   value="10 Feb 2020">
+                                            {% endfor %}
                                         </div>
+                                        <button class="btn btn-info" type="submit"> Send</button>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xxl-3">
-                                    <div class="form-group">
-                                        <label class="form-label">Depart Date</label>
-                                        <div class="form-control-wrap">
-                                            <div class="form-icon form-icon-right">
-                                                <em class="icon ni ni-calendar"></em>
-                                            </div>
-                                            <input type="text" class="form-control date-picker"
-                                                   data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd"
-                                                   value="12 Feb 2020">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xxl-3">
-                                    <div class="form-group">
-                                        <label class="form-label" for="total-person">Total Person</label>
-                                        <input type="number" class="form-control" id="total-person"
-                                               placeholder="Total Person" value="02">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-label" for="default-textarea">Note</label>
-                                        <div class="form-control-wrap">
-                                            <textarea class="form-control no-resize" id="default-textarea">Large text area content</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Update Booking
-                                        </button>
-                                    </div>
-                                </div>
+                                </form>
+
                                 <!--col-->
                             </div>
                             <!--row-->

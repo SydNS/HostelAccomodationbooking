@@ -1,5 +1,6 @@
 # Create your views here.
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -125,6 +126,7 @@ def makehostels(request):
 
 
 # Create your edit-views here.bookingform_
+@staff_member_required
 @login_required
 def edithostel(request, id):
     print(request.method)
@@ -159,8 +161,12 @@ def hostel_details(request, id):
 # Create your views here.
 @login_required
 def hostel_delete(request, id):
-    bookingdetails = get_object_or_404(Hostel, id=id)
+    hostel_to_delete = get_object_or_404(Hostel, id=id)
+    if request.method == "POST":
+        hostel_to_delete.delete()
+        return redirect('hostels:hostels')
 
-    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
-                  context={'bookingeditable': bookingdetails}
+    return render(request=request, template_name='dashboard/hostel/hostel_to_delete.html',
+                  context={'hostel_to_delete': hostel_to_delete}
                   )
+

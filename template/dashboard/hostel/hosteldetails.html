@@ -68,11 +68,27 @@
 
                                         <div class="product-meta">
                                             <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
-
+                                                {% if not user.is_staff %}
                                                 <li>
                                                     <a href="/booking/{{hostel_details.id}}"
-                                                       class="btn btn-primary text-white">Book</a>
+                                                       class="btn btn-success text-white">Book A Room Now</a>
                                                 </li>
+                                                {% endif %}
+
+                                                {% if user.is_staff %}
+                                                <li>
+                                                    <a href="/edit_hostel/{{hostel_details.id}}"
+                                                       class="btn btn-primary text-white">Edit Hostel Details</a>
+                                                </li>
+                                                {% endif %}
+
+                                                {% if user.is_staff %}
+                                                <li>
+                                                    <a href="/delete_hostel/{{hostel_details.id}}"
+                                                       class="btn btn-danger text-white">Delete Hostel</a>
+                                                </li>
+                                                {% endif %}
+
 
                                             </ul>
                                         </div><!-- .product-meta -->

@@ -127,17 +127,19 @@ def makehostels(request):
 # Create your edit-views here.bookingform_
 @login_required
 def edithostel(request, id):
+    print(request.method)
+    hostel_to_edit = get_object_or_404(Hostel, id=id)
     if request.method == "POST":
-        form_filled = HostelForm(request.POST, request.FILES)
+        form_filled = HostelForm(request.POST, request.FILES, instance=hostel_to_edit)
+        print(form_filled.errors)
         if form_filled.is_valid():
             form_filled.save()
-            return redirect('hostel_details',id=id)
+            return redirect('hostels:hostel_details', id=id)
 
-    hostel_to_edit = get_object_or_404(Hostel, id=id)
-    editform = HostelForm(hostel_to_edit)
+    editform = HostelForm(instance=hostel_to_edit)
     return render(request=request, template_name='dashboard/hostel/edit_hostel_details.html',
                   context={'hostel_to_edit': hostel_to_edit,
-                           "editform":editform}
+                           "editform": editform}
                   )
 
 

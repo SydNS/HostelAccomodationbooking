@@ -1,0 +1,95 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Edit Booking</h3>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="row gy-4">
+
+
+                                <div class="col-md-6 col-lg-4 col-xxl-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Arrived Date</label>
+                                        <div class="form-control-wrap">
+                                            <div class="form-icon form-icon-right">
+                                                <em class="icon ni ni-calendar"></em>
+                                            </div>
+                                            <input type="text" class="form-control date-picker"
+                                                   data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd"
+                                                   value="10 Feb 2020">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xxl-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Depart Date</label>
+                                        <div class="form-control-wrap">
+                                            <div class="form-icon form-icon-right">
+                                                <em class="icon ni ni-calendar"></em>
+                                            </div>
+                                            <input type="text" class="form-control date-picker"
+                                                   data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd"
+                                                   value="12 Feb 2020">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xxl-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="total-person">Total Person</label>
+                                        <input type="number" class="form-control" id="total-person"
+                                               placeholder="Total Person" value="02">
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="default-textarea">Note</label>
+                                        <div class="form-control-wrap">
+                                            <textarea class="form-control no-resize" id="default-textarea">Large text area content</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Update Booking
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--col-->
+                            </div>
+                            <!--row-->
+                        </div><!-- .card-inner-group -->
+                    </div><!-- .card -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+<!-- content @e -->
+
+
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

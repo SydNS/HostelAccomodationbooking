@@ -109,6 +109,7 @@ def hostel(request):
 
 
 # Create your create-views here.
+@staff_member_required
 @login_required
 def makehostels(request):
     formpassed = HostelForm()

@@ -81,6 +81,7 @@ class Student(models.Model):
 
     name_user = models.ForeignKey(User, on_delete=models.CASCADE)
     gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
+    photo = models.ImageField(upload_to='profileimages/')
     phonenumber = models.CharField(max_length=10)
     parent_name = models.CharField(max_length=200)
     parent_phonenumber = models.CharField(max_length=10)

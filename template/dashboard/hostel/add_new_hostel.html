@@ -25,25 +25,15 @@
                 <div class="nk-block">
                     <div class="card card-bordered">
                         <div class="card-inner">
-                            <form method="POST"  action="#" enctype="multipart/form-data">
-                                {% csrf_token %}
 
-                                <div class="form-group">
-                                    {{ form|crispy }}
-<!--                                    {% if messages %}-->
-<!--                                    {% for message in messages %}-->
-<!--                                    {% if message.tags %}-->
-<!--                                    {{form.photo}}-->
-<!--                                    <script>-->
-<!--                                alert("{{ message }}")-->
-<!--                                    </script>-->
-<!--                                    {% endif %}-->
-<!--                                    {% endfor %}-->
-<!--                                    {% endif %}-->
+                                <form method="POST" action="#" enctype="multipart/form-data">
+                                    {% csrf_token %}
 
-                                    <button class="btn btn-info" type="submit"> Send</button>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        {{ form|crispy }}
+                                        <button class="btn btn-info" type="submit"> Send</button>
+                                    </div>
+                                </form>
                             <!--row-->
                         </div><!-- .card-inner-group -->
                     </div><!-- .card -->

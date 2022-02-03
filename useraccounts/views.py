@@ -14,8 +14,8 @@ def Registering(request):
 
         email = request.POST['email']
         if User.objects.filter(email=email).exists():
-            messages.error(request, ' This ' +email +'is already in use')
-            return redirect("/register")
+            messages.error(request, ' This ' + email + 'is already in use')
+            return redirect("/login")
 
         if form.is_valid():
             user = form.save()
@@ -68,10 +68,11 @@ def ProfileSetting(request):
             try:
                 student = student_form.save(commit=True)
                 student.save()
+                print(student.photo)
                 registered = True
                 return HttpResponseRedirect("/profiledetails")
             except:
-                pass
+                messages.error(request, "Sorry something went worng.")
         # else:
         #     return HttpResponseRedirect('<p>Hello</p>')
 
@@ -112,29 +113,74 @@ def Profiledetails(request):
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     elif request.method == 'GET':
-        studentdetails = Student.objects.get(name_user=request.user)
+        # studentdetails = Student.objects.get(name_user=request.user)
 
-        student_form = StudentForm(initial={
-            'name_user': studentdetails.name_user,
-            'gender': studentdetails.gender,
-            'date_of_birth': studentdetails.date_of_birth,
-            'reporting_date': studentdetails.reporting_date,
-            'address': studentdetails.address,
-            'parent_name': studentdetails.parent_name,
-            'phonenumber': studentdetails.phonenumber,
-            'city': studentdetails.city,
-            'state': studentdetails.state,
-            'studentIdnumber': studentdetails.studentIdnumber,
-            'level_of_study': studentdetails.level_of_study
+        # if not studentdetails:
+        #
+        try:
+            studentdetails = Student.objects.get(name_user=request.user)
+            student_form = StudentForm(initial={
+                'name_user': studentdetails.name_user,
+                'photo': studentdetails.photo,
+                'gender': studentdetails.gender,
+                'date_of_birth': studentdetails.date_of_birth,
+                'reporting_date': studentdetails.reporting_date,
+                'address': studentdetails.address,
+                'parent_name': studentdetails.parent_name,
+                'phonenumber': studentdetails.phonenumber,
+                'city': studentdetails.city,
+                'state': studentdetails.state,
+                'studentIdnumber': studentdetails.studentIdnumber,
+                'level_of_study': studentdetails.level_of_study
 
-        })
+            })
 
-        age = datetime.datetime.now()
-        age = age.year
-        age = age - studentdetails.date_of_birth.year
+            age = datetime.datetime.now()
+            age = age.year
+            age = age - studentdetails.date_of_birth.year
 
-        return render(request, 'dashboard/hostel/userprofiledetails.html', {
-            'studentdetails': studentdetails,
-            'student_form': student_form,
-            'age': age
-        })
+            return render(request, 'dashboard/hostel/userprofiledetails.html', {
+                'studentdetails': studentdetails,
+                'student_form': student_form,
+                'age': age
+            })
+
+        except:
+            studentdetails={
+                'name_user': "Enter Your Name Here",
+                'gender': "Gender",
+                'date_of_birth': "Enter Birthday",
+                'reporting_date': "Reporting Date",
+                'address': "Your Address",
+                'parent_name': "Parent Names",
+                'phonenumber': "Phone Contact",
+                'city': "Home City",
+                'state': "State/Region",
+                'studentIdnumber': "Your ID.Numebr",
+                'level_of_study': "Year Of Study"
+
+            }
+            student_form = StudentForm(initial={
+                'name_user': "Enter Your Name Here",
+                'gender': "Gender",
+                'date_of_birth': "Enter Birthday",
+                'reporting_date': "Reporting Date",
+                'address': "Your Address",
+                'parent_name': "Parent Names",
+                'phonenumber': "Phone Contact",
+                'city': "Home City",
+                'state': "State/Region",
+                'studentIdnumber': "Your ID.Numebr",
+                'level_of_study': "Year Of Study"
+
+            })
+            age = datetime.datetime.now()
+            age = age.year
+            age = age - 2003
+            req_age = "Should be atleast" + str(age)
+            return render(request, 'dashboard/hostel/userprofiledetails.html', {
+                'studentdetails': studentdetails,
+                'student_form': student_form,
+                'age': req_age
+            })
+

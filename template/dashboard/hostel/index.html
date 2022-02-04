@@ -174,7 +174,7 @@
                                     <div class="card-inner d-flex flex-column h-100">
                                         <div class="card-title-group mb-3">
                                             <div class="card-title">
-                                                <h6 class="title">Bookings So Far Made</h6>
+                                                <h6 class="title">Bookings</h6>
                                             </div>
                                         </div>
                                         <div class="progress-list gy-3">
@@ -228,7 +228,13 @@
                                         <div class="card-inner">
                                             <div class="card-title-group">
                                                 <div class="card-title">
-                                                    <h6 class="title">Student Residents</h6>
+                                                    <h6 class="title">
+                                                        {% if user.is_staff %}
+                                                        Customer Residents (Students)
+                                                        {% else %}
+                                                        Residents (Students)
+                                                        {% endif %}
+                                                    </h6>
                                                 </div>
                                                 <div class="card-tools">
                                                     <a href="html/hotel/customers.html" class="link">View All</a>
@@ -240,11 +246,16 @@
                                             <li>
                                                 <div class="card-inner card-inner-md">
                                                     <div class="user-card">
+
                                                         <div class="user-avatar bg-primary-dim">
-                                                            <span>{{item.customer_name|truncatechars:2|upper }}</span>
+                                                            <span><a
+                                                                    href="/profiledetailofanotheruser/{{item.id}}">{{item.customer_name|truncatechars:2|upper }}</a></span>
+
                                                         </div>
+
                                                         <div class="user-info">
-                                                            <span class="lead-text">{{item.customer_name}}</span>
+                                                                <span class="lead-text"><a class="lead-text"
+                                                                                           href="/profiledetailofanotheruser/{{item.id}}">{{item.customer_name}}</a></span>
                                                             <span class="lead-text">{{item.hostel_name}}</span>
                                                         </div>
                                                         <div class="user-action">
@@ -255,8 +266,9 @@
                                                                         class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <ul class="link-list-opt no-bdr">
-                                                                        <li><a href="/profiledetailofanotheruser/{{item.id}}"><em
-                                                                                class="icon ni ni-setting"></em><span>View Profile</span></a>
+                                                                        <li>
+                                                                            <a href="/profiledetailofanotheruser/{{item.id}}"><em
+                                                                                    class="icon ni ni-setting"></em><span>View Profile</span></a>
                                                                         </li>
                                                                         <li><a href="#"><em
                                                                                 class="icon ni ni-notify"></em><span>{{item.room_type}}</span></a>
@@ -279,164 +291,65 @@
                                     <div class="card-inner border-bottom">
                                         <div class="card-title-group">
                                             <div class="card-title">
-                                                <h6 class="title">Recent Activities</h6>
+                                                <h6 class="title">Room Types</h6>
                                             </div>
                                             <div class="card-tools">
                                                 <ul class="card-tools-nav">
-                                                    <li><a href="#"><span>Cancel</span></a></li>
                                                     <li class="active"><a href="#"><span>All</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                     <ul class="nk-activity">
+
                                         <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-success"><img
-                                                    src="./images/avatar/c-sm.jpg" alt=""></div>
+                                            <div class="nk-activity-media user-avatar bg-info"></div>
                                             <div class="nk-activity-data">
-                                                <div class="label">Keith Jensen requested for room.</div>
-                                                <span class="time">2 hours ago</span>
+                                                <div class="label">Single Room</div>
+                                                <span class="time">Gender : Female</span>
                                             </div>
                                         </li>
                                         <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-warning">HS</div>
+                                            <div class="nk-activity-media user-avatar bg-info"></div>
                                             <div class="nk-activity-data">
-                                                <div class="label">Harry Simpson placed a Order.</div>
-                                                <span class="time">2 hours ago</span>
+                                                <div class="label">Single Room</div>
+                                                <span class="time">Gender : Male</span>
                                             </div>
                                         </li>
                                         <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-azure">SM</div>
+                                            <div class="nk-activity-media user-avatar bg-warning"></div>
                                             <div class="nk-activity-data">
-                                                <div class="label">Stephanie Marshall cancelled booking.</div>
-                                                <span class="time">2 hours ago</span>
+                                                <div class="label">Double Room</div>
+                                                <span class="time">Gender : Female</span>
                                             </div>
                                         </li>
                                         <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-purple"><img
-                                                    src="./images/avatar/d-sm.jpg" alt=""></div>
+                                            <div class="nk-activity-media user-avatar bg-warning"></div>
                                             <div class="nk-activity-data">
-                                                <div class="label">Nicholas Carr confirmed booking.</div>
-                                                <span class="time">2 hours ago</span>
+                                                <div class="label">Double Room</div>
+                                                <span class="time">Gender : Male</span>
                                             </div>
                                         </li>
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-pink">TM</div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Timothy Moreno placed a Order.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
+
                                     </ul>
                                 </div><!-- .card -->
                             </div><!-- .col -->
 
-                            <div class="col-md-6 col-xxl-3">
+                            <div class="col-md-12 col-xxl-3">
                                 <div class="card card-bordered card-full">
                                     <div class="card-inner-group">
                                         <div class="card-inner">
                                             <div class="card-title-group">
                                                 <div class="card-title">
-                                                    <h6 class="title">New Customer</h6>
+                                                    <h6 class="title">List Of Hostels</h6>
                                                 </div>
                                                 <div class="card-tools">
-                                                    <a href="html/hotel/customers.html" class="link">View All</a>
+                                                    <a href="/hostels" class="link">View All</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <ul>
-                                            {% for item in bookingslist %}
-                                            <li>
-                                                <div class="card-inner card-inner-md">
-                                                    <div class="user-card">
-                                                        <div class="user-avatar bg-primary-dim">
-                                                            <span>{{item.uid}}</span>
-                                                        </div>
-                                                        <div class="user-info">
-                                                            <span class="lead-text">{{item.guardian_name}}</span>
-                                                            <span class="sub-text">{{item.guardian_address}}</span>
-                                                        </div>
-                                                        <div class="user-action">
-                                                            <div class="drodown">
-                                                                <a href="#"
-                                                                   class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
-                                                                   data-toggle="dropdown" aria-expanded="false"><em
-                                                                        class="icon ni ni-more-h"></em></a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <ul class="link-list-opt no-bdr">
-                                                                        <li><a href="#"><em
-                                                                                class="icon ni ni-setting"></em><span>Action Settings</span></a>
-                                                                        </li>
-                                                                        <li><a href="#"><em
-                                                                                class="icon ni ni-notify"></em><span>Push Notification</span></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
 
                                     </div>
-                                </div><!-- .card -->
-                            </div><!-- .col -->
-                            <div class="col-md-6 col-xxl-4">
-                                <div class="card card-bordered card-full">
-                                    <div class="card-inner border-bottom">
-                                        <div class="card-title-group">
-                                            <div class="card-title">
-                                                <h6 class="title">Recent Activities</h6>
-                                            </div>
-                                            <div class="card-tools">
-                                                <ul class="card-tools-nav">
-                                                    <li><a href="#"><span>Cancel</span></a></li>
-                                                    <li class="active"><a href="#"><span>All</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="nk-activity">
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-success"><img
-                                                    src="./images/avatar/c-sm.jpg" alt=""></div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Keith Jensen requested for room.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-warning">HS</div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Harry Simpson placed a Order.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-azure">SM</div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Stephanie Marshall cancelled booking.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-purple"><img
-                                                    src="./images/avatar/d-sm.jpg" alt=""></div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Nicholas Carr confirmed booking.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="nk-activity-item">
-                                            <div class="nk-activity-media user-avatar bg-pink">TM</div>
-                                            <div class="nk-activity-data">
-                                                <div class="label">Timothy Moreno placed a Order.</div>
-                                                <span class="time">2 hours ago</span>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div><!-- .card -->
                             </div><!-- .col -->
 

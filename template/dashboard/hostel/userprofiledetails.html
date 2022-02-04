@@ -20,6 +20,7 @@
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">Name : <strong class="text-primary small">
                                 {{studentdetails }}</strong></h3>
+
                             <div class="nk-block-des text-soft">
                                 <ul class="list-inline">
                                     <li>User ID: <span class="text-base">{{ studentdetails.studentIdnumber }}</span>
@@ -49,8 +50,9 @@
                                     </li>
 
                                     <li class="nav-item nav-item-trigger d-xxl-none">
-                                        <a href="#" class="toggle btn btn-icon btn-trigger" data-target="userAside">Edit Profile <em
-                                                class="icon ni ni-user-list-fill"></em></a>
+                                        <a href="#" class="toggle btn btn-icon btn-trigger" data-target="userAside">Edit
+                                            Profile <em
+                                                    class="icon ni ni-user-list-fill"></em></a>
                                     </li>
                                 </ul><!-- .nav-tabs -->
                                 <div class="card-inner">
@@ -59,7 +61,22 @@
                                             <h5 class="title">Personal Information</h5>
 
                                         </div><!-- .nk-block-head -->
+
                                         <div class="profile-ud-list">
+
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <div class="product-thumb">
+                                                        <a href="#">
+                                                            <img class="card-img-top" src="{{studentdetails.photo.url}}"
+                                                                 alt="">
+                                                        </a>
+                                                        <ul class="product-badges">
+                                                            <li><span class="badge badge-success"></span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="profile-ud-item">
                                                 <div class="profile-ud wider">
                                                     <span class="profile-ud-label">Title</span>
@@ -143,7 +160,8 @@
                                                 <span>AB</span>
                                             </div>
                                             <div class="user-info">
-                                                <div class="badge badge-outline-light badge-pill ucap">{{ request.user }}
+                                                <div class="badge badge-outline-light badge-pill ucap">{{ request.user
+                                                    }}
                                                 </div>
                                                 <span class="sub-text">{{ request.user.email }}</span>
                                             </div>

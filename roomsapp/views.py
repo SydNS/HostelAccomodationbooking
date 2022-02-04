@@ -102,8 +102,8 @@ def edit_room(request, id):
 @login_required
 def room_details(request, id):
     hostel_details = get_object_or_404(Roommodel, id=id)
-    ratings = hostel_details.ratings
-    return render(request=request, template_name='dashboard/hostel/hosteldetails.html',
+    ratings = hostel_details.hostel_name.ratings
+    return render(request=request, template_name='dashboard/hostel/room_details.html',
                   context={
                       'hostel_details': hostel_details,
                       'ratings': range(ratings),

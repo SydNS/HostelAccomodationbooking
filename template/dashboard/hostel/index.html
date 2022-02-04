@@ -198,15 +198,17 @@
 
                                                         <tr>
                                                             <td><a href="/bookings/{{booking.id}}/"
-                                                                   class="text-primary">{{booking.customer_name}}</a>
+                                                                   class="text-primary">{{booking.customer_name|title}}</a>
                                                             </td>
-                                                            <td>{{booking.room_type}}</td>
-                                                            <td>{{booking.duration}}</td>
-                                                            <td>{{booking.payment_status}}</td>
+                                                            <td>{{booking.room_type|title}}</td>
+                                                            <td>{{booking.duration|title}}</td>
+                                                            <td>{{booking.payment_status|title}}</td>
                                                             <td>{{booking.arrival_date}}</td>
-                                                            <td>{{booking.booked}}</td>
+                                                            <td>{{booking.booked|title}}</td>
+                                                            {% if user == booking.customer_name %}
                                                             <td><a class="btn btn-danger btn-sm text-white"
                                                                    href="/delete_bookings/{{booking.id}}/">Del</a></td>
+                                                            {% endif %}
                                                         </tr>
                                                         {% endfor %}
                                                         </tbody>

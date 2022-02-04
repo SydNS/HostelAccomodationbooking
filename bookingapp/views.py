@@ -10,28 +10,14 @@ from useraccounts.models import Student
 from hostels.models import Hostel
 
 
-#
-# class Bookhosteltable(models.Model):
-#     PAYMENT_CHOICES = [
-#         ('PAID', 'PAID'),
-#         ('DUE', 'DUE'),
-#     ]
-#     uid = models.CharField(max_length=40)
-#     customer_name = models.ForeignKey('useraccounts.Student', on_delete=models.CASCADE)
-#     room_type = models.ForeignKey('roomsapp.Roommodel', on_delete=models.CASCADE)
-#     duration = models.IntegerField()
-#     booked = models.BooleanField(default=False)
-#     arrival_date = models.DateField(null=True, blank=True)
-#     payment_status = models.CharField(max_length=10, choices=PAYMENT_CHOICES)
-
-# Create your create-views here.
-
 
 @login_required
 def index(request):
     bookingslist = Bookhosteltable.objects.all()
     roomsobj = Roommodel.objects.all()
     studentlistobj = Student.objects.all()
+    hostelsobj = Hostel.objects.all()
+    numberofbooking = hostelsobj.count
 
     # print(len(roomsobj))
 
@@ -43,6 +29,9 @@ def index(request):
                                'immediate_price_diff_sec_third': 0,
                                'firstprice': 0,
                                'lastprice': 0,
+                               # hostels info
+                               'hostelsobj': hostelsobj,
+                               'numberofbooking': numberofbooking,
 
                                }
                       )
@@ -109,6 +98,10 @@ def index(request):
                 'students_secondyear': students_secondyear,
                 'students_thridyear': students_thridyear,
                 'students_forthyear': students_forthyear,
+
+                # hostels info
+                'hostelsobj': hostelsobj,
+                'numberofbooking': numberofbooking,
 
             }
                       )

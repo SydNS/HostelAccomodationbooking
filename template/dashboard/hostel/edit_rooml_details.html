@@ -1,0 +1,67 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Edit {{room_to_edit}}</h3>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="row gy-4">
+                                <form method="POST" action="#" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                    <div class="form-group">
+                                        <div class="row gy-4">
+<!--                                            {{ editform|crispy}}-->
+                                            {% for field in editform %}
+                                            <div class="col-md-6 col-lg-4 col-xxl-3">
+                                                <div class="form-group">
+
+                                                    <div class="form-control-wrap">
+                                                        {{ field|as_crispy_field }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <button class="btn btn-info" type="submit"> Send</button>
+                                    </div>
+                                </form>
+
+                                <!--col-->
+                            </div>
+                            <!--row-->
+                        </div><!-- .card-inner-group -->
+                    </div><!-- .card -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+<!-- content @e -->
+
+
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

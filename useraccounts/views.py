@@ -142,6 +142,7 @@ def Profiledetails(request):
             return render(request, 'dashboard/hostel/userprofiledetails.html', {
                 'studentdetails': studentdetails,
                 'student_form': student_form,
+                'mod_profile': "Edit Profile",
                 'age': age
             })
 
@@ -181,6 +182,7 @@ def Profiledetails(request):
             return render(request, 'dashboard/hostel/userprofiledetails.html', {
                 'studentdetails': studentdetails,
                 'student_form': student_form,
+                'mod_profile': "Create Profile",
                 'age': req_age
             })
 

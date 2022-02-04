@@ -168,7 +168,7 @@
                             </div><!-- .col -->
 
                             <!--                            table only staff sees-->
-                            {% if user.is_staff %}
+<!--                            {% if user.is_staff %}-->
                             <div class="col-xxl-4">
                                 <div class="card card-bordered card-full">
                                     <div class="card-inner d-flex flex-column h-100">
@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endif %}
+<!--                            {% endif %}-->
 
                             <div class="col-md-6 col-xxl-3">
                                 <div class="card card-bordered card-full">
@@ -247,10 +247,10 @@
                                                 <div class="card-inner card-inner-md">
                                                     <div class="user-card">
 
-                                                        <div class="user-avatar bg-primary-dim">
-                                                            <span><a
-                                                                    href="/profiledetailofanotheruser/{{item.id}}">{{item.customer_name|truncatechars:2|upper }}</a></span>
-
+                                                        <div class="user-avatar bg-light">
+                                                            <span>
+                                                                <a href="/profiledetailofanotheruser/{{item.id}}"><img src="{{item.customer_name.photo.url}}"/></a>
+                                                            </span>
                                                         </div>
 
                                                         <div class="user-info">

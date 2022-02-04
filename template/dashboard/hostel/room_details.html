@@ -28,7 +28,7 @@
                                 </div><!-- .col -->
                                 <div class="col-lg-7">
                                     <div class="product-details entry mr-xxl-3">
-                                        <h3>{{ room_details.room_capacity }} Room</h3>
+                                        <h3>A {{ room_details.hostel_name }} {{ room_details.room_capacity }} Room </h3>
                                         <p>Merging elegant style with contemporary comfort, the 188 hotel rooms and
                                             suites at the
                                             {{ room_details.hostel_name }} are beautifully furnished, appointed with
@@ -39,22 +39,49 @@
                                             Hotels of the World collection..</p>
 
                                         <ul class="list list-sm list-checked">
-                                            <li>{{ room_details.hostel_name}}.</li>
-                                            <li>{{ room_details.gender}}</li>
-                                            <li>{{ room_details.lavatory}}.</li>
-                                            <li>{{ room_details.room_capacity}}..</li>
+                                            <li>{{ room_details.hostel_name}} Hostel.</li>
+                                            <li>{{ room_details.gender}} Room</li>
+                                            <li>{{ room_details.lavatory}} Lavatory</li>
+                                            <li>{{ room_details.room_capacity}} Room</li>
                                             <li>{{ room_details.hostel_name}}.</li>
                                             <li>As attractively priced at
                                                 {% if room_details.room_capacity is "Double" %}
-                                                {{ room_details.hostel_name.doubleroom_price}}.
+                                                <span class="text-danger">{{ room_details.hostel_name.doubleroom_price}}.
                                                 {% else %}
-                                                {{ room_details.hostel_name.singleroom_price}}.
+                                                    {{ room_details.hostel_name.singleroom_price}}.</span>
                                                 {% endif %} as you look attractive in one
                                             </li>
                                         </ul>
-                                        
+
                                     </div>
                                 </div><!-- .col -->
+
+                                <div class="product-meta">
+                                    <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                        {% if not user.is_staff %}
+                                        <li>
+                                            <a href="/booking/{{room_details.hostel_name.id}}"
+                                               class="btn btn-success text-white">Book This Room Now</a>
+                                        </li>
+                                        {% endif %}
+
+                                        {% if user.is_staff %}
+                                        <li>
+                                            <a href="/edit_room/{{room_details.id}}"
+                                               class="btn btn-primary text-white">Edit Room Details</a>
+                                        </li>
+                                        {% endif %}
+
+                                        {% if user.is_staff %}
+                                        <li>
+                                            <a href="/delete_room/{{room_details.hostel_name.id}}"
+                                               class="btn btn-danger text-white">Delete Room</a>
+                                        </li>
+                                        {% endif %}
+
+
+                                    </ul>
+                                </div><!-- .product-meta -->
                             </div><!-- .row -->
                         </div>
                     </div>

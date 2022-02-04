@@ -12,8 +12,8 @@
                 </div>
                 <div class="nk-header-brand d-xl-none">
                     <a href="html/index.html" class="logo-link">
-                        <img class="logo-light logo-img" src="{% static 'dashboard/images/logo.png' %}" >
-                        <img class="logo-dark logo-img" src="{% static 'dashboard/images/logo.png' %}" >
+                        <img class="logo-light logo-img" src="{% static 'dashboard/images/logo.png' %}">
+                        <img class="logo-dark logo-img" src="{% static 'dashboard/images/logo.png' %}">
                     </a>
                 </div><!-- .nk-header-brand -->
                 <div class="nk-header-news d-none d-xl-block">
@@ -48,23 +48,18 @@
                                 <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                     <div class="user-card">
                                         <div class="user-avatar">
-                                        <em class="icon ni ni-user-alt"></em>
+                                            <em class="icon ni ni-user-alt"></em>
                                         </div>
                                         <div class="user-info">
-                                        <div class="user-name dropdown-indicator">{{ request.user|upper }}</div>
+                                            <div class="user-name dropdown-indicator">{{ request.user|upper }}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="dropdown-inner">
                                     <ul class="link-list">
-                                        <li><a href="/profiledetails"><em
-                                                class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                        <li><a href="html/user-profile-setting.html"><em
-                                                class="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
-                                        </li>
-                                        <li><a href="html/user-profile-activity.html"><em
-                                                class="icon ni ni-activity-alt"></em><span>Login Activity</span></a>
-                                        </li>
+                                        <li>
+                                            <a href="{% if user.is_staff %}/admin{% else %}/profiledetails{% endif %}"><em
+                                                    class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
                                         <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a>
                                         </li>
                                     </ul>

@@ -146,7 +146,7 @@ def Profiledetails(request):
             })
 
         except:
-            studentdetails={
+            studentdetails = {
                 'name_user': "Enter Your Name Here",
                 'gender': "Gender",
                 'date_of_birth': "Enter Birthday",
@@ -184,3 +184,11 @@ def Profiledetails(request):
                 'age': req_age
             })
 
+
+def Profiledetailofanotheruser(request, id):
+    studentdetails = Student.objects.get(id=id)
+
+    return render(request, 'dashboard/hostel/profiledetails.html', {
+        'studentdetails': studentdetails,
+
+    })

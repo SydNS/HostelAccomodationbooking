@@ -16,4 +16,7 @@ urlpatterns = [
 
     # path("", include("hostelbookingandroommaterecommenderapp.urls"),name="dashboard"),
 
+    path("students", views.Customersview, name='students'),
+    path("students/<int:id>", views.Customerdetailsview, name='studentdetail'),
+
 ]

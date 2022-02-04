@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('profiledetails/', views.Profiledetails, name='profiledetails'),
 
+    path('profiledetailofanotheruser/<int:id>/', views.Profiledetailofanotheruser, name='profiledetailofanotheruser'),
+
     # path("", include("hostelbookingandroommaterecommenderapp.urls"),name="dashboard"),
 
 ]

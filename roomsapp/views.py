@@ -80,21 +80,31 @@ def rooms(request):
 def add_room(request):
     formpassed = RoomForm()
     if request.method == "POST":
-        roomform = RoomForm(request.POST)
+        roomform = RoomForm(request.POST, request.FILES)
         if roomform.is_valid():
-            roomform_ = roomform.save(commit=True)
-            roomform_.save()
-            return redirect('rooms')
-    else:
-        return render(request=request, template_name='dashboard/hostel/booking-add.html', context={'form': formpassed})
+            roomform.save()
+            return redirect('roomsapp:rooms')
+
+    return render(request=request, template_name='dashboard/hostel/add_a_room.html', context={'form': formpassed})
 
 
 # Create your edit-views here.bookingform_
 @login_required
 def edit_room(request, id):
-    bookingeditable = get_object_or_404(RoomForm, id=id)
-    return render(request=request, template_name='dashboard/hostel/booking-edit.html',
-                  context={'bookingeditable': bookingeditable}
+    print(request.method)
+    room_to_edit = get_object_or_404(Roommodel, id=id)
+
+    if request.method == "POST":
+        form_filled = RoomForm(request.POST, request.FILES, instance=room_to_edit)
+        print(form_filled.errors)
+        if form_filled.is_valid():
+            form_filled.save()
+            return redirect('roomsapp:room', id=id)
+
+    editform = RoomForm(instance=room_to_edit)
+    return render(request=request, template_name='dashboard/hostel/edit_rooml_details.html',
+                  context={'room_to_edit': room_to_edit,
+                           "editform": editform}
                   )
 
 
@@ -118,7 +128,7 @@ def delete_room(request, id):
     room_to_delete = get_object_or_404(Roommodel, id=id)
     if request.method == "POST":
         room_to_delete.delete()
-        return redirect('rooms')
+        return redirect('roomsapp:rooms')
 
     return render(request=request, template_name='dashboard/hostel/room-delete.html',
                   context={'room_to_delete': room_to_delete}

@@ -1,0 +1,122 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">We have {{totalusers}} student.</h3>
+                        </div><!-- .nk-block-head-content -->
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em
+                                        class="icon ni ni-more-v"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+<!--                                        <li>-->
+<!--                                            <div class="form-control-wrap">-->
+<!--                                                <div class="form-icon form-icon-right">-->
+<!--                                                    <em class="icon ni ni-search"></em>-->
+<!--                                                </div>-->
+<!--                                                <input type="text" class="form-control" id="default-04"-->
+<!--                                                       placeholder="Quick search by id">-->
+<!--                                            </div>-->
+<!--                                        </li>-->
+                                        {% if user.is_staff %}
+                                        <li class="nk-block-tools-opt">
+                                            <a href="/admin/auth/user/add/" data-target="addProduct"
+                                               class="toggle btn btn-icon btn-primary d-md-none"><em
+                                                    class="icon ni ni-plus"></em>Add Student / User</a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- .nk-block-head-content -->
+                    </div><!-- .nk-block-between -->
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="row g-gs">
+                        {% for studentdetail in studentdetails %}
+                        <div class="col-xxl-3 col-lg-4 col-sm-6">
+                            <div class="card card-bordered product-card">
+                                <div class="product-thumb">
+                                    <a href="/students/{{studentdetail.id}}">
+                                        <img class="card-img-top" src="{{studentdetail.photo.url}}" alt="">
+                                    </a>
+                                    <ul class="product-badges">
+                                        <li><span class="badge badge-success"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="card-inner text-center">
+                                    <ul class="product-tags">
+                                        <li><a href="#">{{studentdetail.name}}</a></li>
+                                    </ul>
+                                    <h5 class="product-title"><a
+                                            href="html/product-details.html">{{studentdetail.address}}</a></h5>
+                                    <div class="product-price text-primary h5"><small class="fs-13px">{{hostel.total_rooms}}
+                                        rooms</small>
+                                        {{studentdetail.phonenumber}} booked rooms
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .col -->
+                        {% endfor %}
+
+                    </div>
+                </div><!-- .nk-block -->
+                <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct"
+                     data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+                    <div class="nk-block-head">
+                        <div class="nk-block-head-content">
+                            <h5 class="nk-block-title">New Hostel</h5>
+                            <div class="nk-block-des">
+                                <p>Add new Hostel.</p>
+                            </div>
+                        </div>
+                    </div><!-- .nk-block-head -->
+                    <div class="nk-block">
+                        <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="card-head">
+                                <h5 class="card-title">Add New Hostel</h5>
+                            </div>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+
+                                <div class="form-group" action="">
+                                    {{ addhostelform|crispy }}
+                                    <div class="col-12">
+                                        <button class="btn btn-primary"><em
+                                                class="icon ni ni-plus"></em><span>Add New</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        </div>
+                    </div><!-- .nk-block -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between g-3">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">{{studentdetails.name_user}} Details</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>Some information about this {{studentdetails.name_user}}</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <a href="javascript:history.back()"
+                               class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em
+                                    class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                        </div>
+                    </div>
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="row pb-5">
+                                <div class="col-lg-6">
+                                    <img src="{{studentdetails.photo.url}}" class="w-100" alt="">
+
+                                </div><!-- .col -->
+                                <div class="col-lg-6">
+                                    <div class="product-info mt-5 mr-xxl-5">
+                                        <h4 class="product-price text-primary">Gender :
+                                            {{studentdetails.gender}} Ugx
+                                        </h4>
+                                        <small class="text-muted fs-14px">Single Room :
+                                            {{studentdetails.phonenumber}}</small>
+                                        <h2 class="product-title">{{hostel_details.name}}</h2>
+                                        <div class="product-rating">
+                                            <ul class="rating">
+                                                {% for star in ratings %}
+                                                <li><em class="icon ni ni-star-fill"></em></li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="amount">{{hostel_details.ratings}} star ratings</div>
+                                        </div><!-- .product-rating -->
+                                        <div class="product-excrept text-soft">
+                                            <p class="lead">
+                                                {{studentdetails}}.</p>
+                                        </div>
+
+                                        <div class="product-meta">
+                                            <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                                {% if not user.is_staff %}
+                                                <li>
+                                                    <a href="/booking/{{hostel_details.id}}"
+                                                       class="btn btn-success text-white">Book A Room Now</a>
+                                                </li>
+                                                {% endif %}
+
+                                                {% if user.is_staff %}
+                                                <li>
+                                                    <a href="/edit_hostel/{{hostel_details.id}}"
+                                                       class="btn btn-primary text-white">Edit Hostel Details</a>
+                                                </li>
+                                                {% endif %}
+
+                                                {% if user.is_staff %}
+                                                <li>
+                                                    <a href="/delete_hostel/{{hostel_details.id}}"
+                                                       class="btn btn-danger text-white">Delete Hostel</a>
+                                                </li>
+                                                {% endif %}
+
+
+                                            </ul>
+                                        </div><!-- .product-meta -->
+                                    </div><!-- .product-info -->
+                                </div><!-- .col -->
+                            </div><!-- .row -->
+                            <hr class="hr border-light">
+
+                        </div>
+                    </div>
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

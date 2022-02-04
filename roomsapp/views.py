@@ -101,11 +101,11 @@ def edit_room(request, id):
 # Create your views here.
 @login_required
 def room_details(request, id):
-    hostel_details = get_object_or_404(Roommodel, id=id)
-    ratings = hostel_details.hostel_name.ratings
+    room_details = get_object_or_404(Roommodel, id=id)
+    ratings = room_details.hostel_name.ratings
     return render(request=request, template_name='dashboard/hostel/room_details.html',
                   context={
-                      'hostel_details': hostel_details,
+                      'room_details': room_details,
                       'ratings': range(ratings),
                   }
                   )

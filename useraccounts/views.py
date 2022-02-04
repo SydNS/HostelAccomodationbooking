@@ -192,3 +192,12 @@ def Profiledetailofanotheruser(request, id):
         'studentdetails': studentdetails,
 
     })
+
+
+def Customerview(request, id):
+    studentdetails = Student.objects.get(id=id)
+
+    return render(request, 'dashboard/hostel/profiledetails.html', {
+        'studentdetails': studentdetails,
+
+    })

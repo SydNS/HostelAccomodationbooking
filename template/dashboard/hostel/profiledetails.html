@@ -1,0 +1,179 @@
+{% extends 'dashboard/hostel/base.html' %}
+<!--{% load static %}-->
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- sidebar @s -->
+{% include 'dashboard/hostel/includes/sidenavbar.html' %}
+<!-- sidebar @s -->
+
+<!-- main header @s -->
+{% include 'dashboard/hostel/includes/header.html' with person=request.user %}
+<!-- main header @e -->
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between g-3">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Name : <strong class="text-primary small">
+                                {{studentdetails }}</strong></h3>
+                            <div class="nk-block-des text-soft">
+                                <ul class="list-inline">
+                                    <li>User ID: <span class="text-base">{{ studentdetails.studentIdnumber }}</span>
+                                    </li>
+                                    <li>Age : <span class="text-base">{{ age }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <a href="javascript:history.go(-1)"
+                               class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em
+                                    class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                            <a href="html/user-list-regular.html"
+                               class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em
+                                    class="icon ni ni-arrow-left"></em></a>
+                        </div>
+                    </div>
+                </div><!-- .nk-block-head -->
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-aside-wrap">
+                            <div class="card-content">
+                                <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="#"><em
+                                                class="icon ni ni-user-circle active"></em><span class="active">{{ studentdetails.name_user|title }}</span></a>
+                                    </li>
+                                    {% if request.user == studentdetails.name_user %}
+                                    <li class="nav-item nav-item-trigger d-xxl-none">
+                                        <a href="#" class="toggle btn btn-icon btn-trigger" data-target="userAside">Edit Profile <em
+                                                class="icon ni ni-user-list-fill"></em></a>
+                                    </li>
+                                    {% endif %}
+                                </ul><!-- .nav-tabs -->
+                                <div class="card-inner">
+                                    <div class="nk-block">
+                                        <div class="nk-block-head">
+                                            <h5 class="title">Personal Information</h5>
+
+                                        </div><!-- .nk-block-head -->
+                                        <div class="profile-ud-list">
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Title</span>
+                                                    <span class="profile-ud-value">
+                                                            {% if studentdetails.gender is "male"  %}
+                                                            Mr
+                                                            {% else  %}
+                                                            Ms
+                                                            {% endif %}
+                                                        </span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Full Name</span>
+                                                    <span class="profile-ud-value">{{ studentdetails.name_user|title }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Date of Birth</span>
+                                                    <span class="profile-ud-value">{{ studentdetails.date_of_birth|title }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Mobile Number</span>
+                                                    <span class="profile-ud-value">{{ studentdetails.phonenumber }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Email Address</span>
+                                                    <span class="profile-ud-value">{{ studentdetails.name_user.email }}</span>
+                                                </div>
+                                            </div>
+                                        </div><!-- .profile-ud-list -->
+                                    </div><!-- .nk-block -->
+                                    <div class="nk-block">
+                                        <div class="nk-block-head nk-block-head-line">
+                                            <h6 class="title overline-title text-base">Additional Information</h6>
+                                        </div><!-- .nk-block-head -->
+                                        <div class="profile-ud-list">
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Joining Date</span>
+                                                    <span class="profile-ud-value">{{studentdetails.reporting_date}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Year of Study</span>
+                                                    <span class="profile-ud-value">{{studentdetails.level_of_study|title}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Country</span>
+                                                    <span class="profile-ud-value">{{ studentsdetails.state }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="profile-ud-item">
+                                                <div class="profile-ud wider">
+                                                    <span class="profile-ud-label">Nationality</span>
+                                                    <span class="profile-ud-value">Ugandan</span>
+                                                </div>
+                                            </div>
+                                        </div><!-- .profile-ud-list -->
+                                    </div><!-- .nk-block -->
+                                    <div class="nk-divider divider md"></div>
+                                </div><!-- .card-inner -->
+                            </div><!-- .card-content -->
+                            <div class="card-aside card-aside-right user-aside toggle-slide toggle-slide-right toggle-break-xxl"
+                                 data-content="userAside" data-toggle-screen="xxl" data-toggle-overlay="true"
+                                 data-toggle-body="true">
+                                <div class="card-inner-group" data-simplebar>
+                                    <div class="card-inner">
+                                        <div class="user-card user-card-s2">
+                                            <div class="user-avatar sm bg-primary">
+                                                <span>AB</span>
+                                            </div>
+                                            <div class="user-info">
+                                                <div class="badge badge-outline-light badge-pill ucap">{{ request.user }}
+                                                </div>
+                                                <span class="sub-text">{{ request.user.email }}</span>
+                                            </div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+
+                                    <div class="card-inner card-inner-sm">
+                                        <form method="POST" action="">
+                                            <p><strong>Edit Your Profile</strong>
+                                            </p>
+                                            {% csrf_token %}
+                                            {{ student_form|crispy }}
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                                        </form><!-- form -->
+
+                                    </div>
+                                </div><!-- .card-inner -->
+                            </div><!-- .card-aside -->
+                        </div><!-- .card-aside-wrap -->
+                    </div><!-- .card -->
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+
+
+<!-- footer @s -->
+{% include 'dashboard/hostel/includes/footer.html' %}
+<!-- footer @e -->
+{% endblock %}

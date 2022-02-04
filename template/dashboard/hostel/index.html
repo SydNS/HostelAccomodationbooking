@@ -174,22 +174,7 @@
                                     <div class="card-inner d-flex flex-column h-100">
                                         <div class="card-title-group mb-3">
                                             <div class="card-title">
-                                                <h6 class="title">Top Selected Package</h6>
-                                                <p>In last 30 days top selected package.</p>
-                                            </div>
-                                            <div class="card-tools mt-n1 mr-n1">
-                                                <div class="drodown">
-                                                    <a href="#"
-                                                       class="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white"
-                                                       data-toggle="dropdown">30 Days</a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
-                                                        <ul class="link-list-opt no-bdr">
-                                                            <li><a href="#"><span>7 Days</span></a></li>
-                                                            <li><a href="#"><span>15 Days</span></a></li>
-                                                            <li><a href="#"><span>30 Days</span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <h6 class="title">Bookings So Far Made</h6>
                                             </div>
                                         </div>
                                         <div class="progress-list gy-3">
@@ -211,15 +196,18 @@
                                                         <tbody>
                                                         {% for booking in bookingslist %}
 
-                                                            <tr>
-                                                                <td> <a href="/bookings/{{booking.id}}/" class="text-primary">{{booking.customer_name}}</a></td>
-                                                                <td>{{booking.room_type}}</td>
-                                                                <td>{{booking.duration}}</td>
-                                                                <td>{{booking.payment_status}}</td>
-                                                                <td>{{booking.arrival_date}}</td>
-                                                                <td>{{booking.booked}}</td>
-                                                                <td><a class="btn btn-danger btn-sm text-white"  href="/delete_bookings/{{booking.id}}/">Del</a></td>
-                                                            </tr>
+                                                        <tr>
+                                                            <td><a href="/bookings/{{booking.id}}/"
+                                                                   class="text-primary">{{booking.customer_name}}</a>
+                                                            </td>
+                                                            <td>{{booking.room_type}}</td>
+                                                            <td>{{booking.duration}}</td>
+                                                            <td>{{booking.payment_status}}</td>
+                                                            <td>{{booking.arrival_date}}</td>
+                                                            <td>{{booking.booked}}</td>
+                                                            <td><a class="btn btn-danger btn-sm text-white"
+                                                                   href="/delete_bookings/{{booking.id}}/">Del</a></td>
+                                                        </tr>
                                                         {% endfor %}
                                                         </tbody>
                                                     </table>
@@ -238,7 +226,7 @@
                                         <div class="card-inner">
                                             <div class="card-title-group">
                                                 <div class="card-title">
-                                                    <h6 class="title">New Customer</h6>
+                                                    <h6 class="title">Student Residents</h6>
                                                 </div>
                                                 <div class="card-tools">
                                                     <a href="html/hotel/customers.html" class="link">View All</a>
@@ -251,11 +239,11 @@
                                                 <div class="card-inner card-inner-md">
                                                     <div class="user-card">
                                                         <div class="user-avatar bg-primary-dim">
-                                                            <span>{{item.uid}}</span>
+                                                            <span>{{item.customer_name|truncatechars:2|upper }}</span>
                                                         </div>
                                                         <div class="user-info">
-                                                            <span class="lead-text">{{item.guardian_name}}</span>
-                                                            <span class="sub-text">{{item.guardian_address}}</span>
+                                                            <span class="lead-text">{{item.customer_name}}</span>
+                                                            <span class="lead-text">{{item.hostel_name}}</span>
                                                         </div>
                                                         <div class="user-action">
                                                             <div class="drodown">
@@ -265,11 +253,11 @@
                                                                         class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <ul class="link-list-opt no-bdr">
-                                                                        <li><a href="#"><em
-                                                                                class="icon ni ni-setting"></em><span>Action Settings</span></a>
+                                                                        <li><a href="/profiledetailofanotheruser/{{item.id}}"><em
+                                                                                class="icon ni ni-setting"></em><span>View Profile</span></a>
                                                                         </li>
                                                                         <li><a href="#"><em
-                                                                                class="icon ni ni-notify"></em><span>Push Notification</span></a>
+                                                                                class="icon ni ni-notify"></em><span>{{item.room_type}}</span></a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -449,6 +437,37 @@
                                     </ul>
                                 </div><!-- .card -->
                             </div><!-- .col -->
+
+                            <div class="nk-block">
+                                <div class="row g-gs">
+                                    {% for hostel in hostelsobj %}
+                                    <div class="col-xxl-3 col-lg-4 col-sm-6">
+                                        <div class="card card-bordered product-card">
+                                            <div class="product-thumb">
+                                                <a href="/hostel/{{hostel.id}}">
+                                                    <img class="card-img-top" src="{{hostel.photo.url}}" alt="">
+                                                </a>
+                                                <ul class="product-badges">
+                                                    <li><span class="badge badge-success"></span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-inner text-center">
+                                                <ul class="product-tags">
+                                                    <li><a href="#">{{hostel.name}}</a></li>
+                                                </ul>
+                                                <h5 class="product-title"><a
+                                                        href="html/product-details.html">{{hostel.location}}</a></h5>
+                                                <div class="product-price text-primary h5"><small class="fs-13px">{{hostel.total_rooms}}
+                                                    rooms</small>
+                                                    {{hostel.total_booked_rooms}} booked rooms
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .col -->
+                                    {% endfor %}
+
+                                </div>
+                            </div>
                         </div><!-- .row -->
                     </div><!-- .nk-block -->
                 </div>

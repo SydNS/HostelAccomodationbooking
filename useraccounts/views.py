@@ -161,7 +161,7 @@ def Profiledetails(request):
 
             }
             student_form = StudentForm(initial={
-                'name_user': "Enter Your Name Here",
+                'name_user': "Enter Your Name ",
                 'gender': "Gender",
                 'date_of_birth': "Enter Birthday",
                 'reporting_date': "Reporting Date",

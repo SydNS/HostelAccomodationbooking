@@ -194,10 +194,20 @@ def Profiledetailofanotheruser(request, id):
     })
 
 
-def Customerview(request, id):
+def Customersview(request):
+    studentdetails = Student.objects.all()
+    totalusers = studentdetails.count()
+
+    return render(request, 'dashboard/hostel/studentslistwithimages.html', {
+        'studentdetails': studentdetails,
+        'totalusers': totalusers,
+
+    })
+
+def Customerdetailsview(request,id):
     studentdetails = Student.objects.get(id=id)
 
-    return render(request, 'dashboard/hostel/profiledetails.html', {
+    return render(request, 'dashboard/hostel/userprofiledetails.html', {
         'studentdetails': studentdetails,
 
     })
